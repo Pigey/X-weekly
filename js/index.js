@@ -1,6 +1,6 @@
 (function(){
 
-util.setSideLink('查看本周', './list.html');
+util.setSideLink('本周周报', './list.html');
 
 var inputs = {
     person: $('#person-in'),
