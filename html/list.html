@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-	<title>Weekly</title>
+	<title>WEEKLY</title>
 	<script type="text/javascript" src="../dep/X-client/lib.js"></script>
 	<script type="text/javascript" src="../dep/stupid-lib/dist/lib.js"></script>
 	<script type="text/javascript" src="../dep/artTemplate/dist/template.js"></script>
@@ -21,6 +21,9 @@
 					<p class="task-cnt">{{task.cnt}}</p>
 					<span class="task-status">{{if task.status}}[{{task.status}}]{{/if}}</span>
 					<span class="task-person">{{task.person}}</span>
+					{{if removeable}}
+					<span class="j-remove op-remove" data-task-id="{{task._id}}">X</span>
+					{{/if}}
 				</li>
 				{{/each}}
 			</ul>
@@ -43,7 +46,7 @@
 <header class="header">
 	<div class="inner-header">
 		<h1 class="title">
-			<a href="./index.html">Weekly</a>
+			<a href="./index.html">WEEKLY</a>
 			<a id="side-link" class="side-link"></a>
 		</h1>
 	</div>
@@ -53,6 +56,9 @@
 <link rel="stylesheet" type="text/css" href="../css/list.css">
 
 <div class="main">
+	<h5 class="title-line">
+		<a id="down-link" href="">Download</a>
+	</h5>
 	<div id="list" class="list-wrapper"></div>
 </div>
 

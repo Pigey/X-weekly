@@ -1,4 +1,4 @@
-X.connect('http://cq01-rdqa-dev056.cq01.baidu.com:8083').config({token:'14143'});
+X.connect('http://cq01-rdqa-dev056.cq01.baidu.com:8083').config({token:'84054ce010d1ab12ad08dbf0a29e495b'});
 
 var util = {
     currWeek: Math.ceil(Date.now() / (1000 * 60 * 60 * 24 * 7)),
