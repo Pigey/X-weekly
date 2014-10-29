@@ -1,0 +1,116 @@
+@import "global.less";
+
+body{
+	color: #333;
+    font-family: "Helvetica Neue", Helvetica, arial, "Microsoft YaHei";
+}
+
+.center{
+	position: relative;
+
+	width: 960px;
+	margin: 0 auto;
+}
+
+.inner-header, .main, .inner-footer{
+	.center;
+}
+
+@media screen and (min-width:1280px) and (max-width:1440px){
+	.inner-header, .main, .inner-footer{
+		width: 1280px;
+	}
+}
+
+@media screen and (min-width:1440px){
+	.inner-header, .main, .inner-footer{
+		width: 1440px;
+	}
+}
+
+.header{
+	border-bottom: 1px solid #eee;
+
+	.title{
+		padding: 20px 0;
+		font-size: 40px;
+	}
+
+	.side-link{
+		float: right;
+
+		line-height: 44px;
+		font-size: 14px;
+	}
+}
+
+.main{
+	margin-top: 20px;
+	padding: 20px 0;
+	min-height: 200px;
+}
+
+.footer{
+	margin-top: 20px;
+	padding: 20px 0;
+	height: 40px;
+
+	.about{
+		text-align: center;
+		font-size: 12px;
+		color: #666;
+	}
+}
+
+.project-list{
+	list-style: square;
+
+	.project-item{
+		margin: 15px 0 25px;
+	}
+
+	.project-name{
+		font-size: 16px;
+	}
+
+	.task-list{
+		list-style: none;
+		font-size: 14px;
+		line-height: 1.4em;
+
+		.task-item{
+			position: relative;
+			padding: 0 180px 0 40px;
+			margin: 15px 0;
+		}
+
+		.task-num{
+			position: absolute;
+			left: 0;
+			top: 0;
+			text-align: right;
+			width: 35px;
+		}
+
+		.task-cnt{
+			display: inline-block;
+			margin-right: 20px;
+		}
+
+		.task-status{
+			.overflow-ellipsis;
+			position: absolute;
+			top: 0;
+			right: 90px;
+			width: 70px;
+		}
+
+		.task-person{
+			.overflow-ellipsis;
+			position: absolute;
+			top: 0;
+			right: 30px;
+			width: 50px;
+		}
+	}
+}

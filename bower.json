@@ -1,0 +1,19 @@
+{
+  "name": "code-doctor",
+  "version": "0.0.1",
+  "homepage": "none",
+  "authors": [],
+  "license": "none",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dep",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "stupid-lib": "~1.2.0",
+    "artTemplate": "https://github.com/aui/artTemplate.git#~3.0.1"
+  }
+}

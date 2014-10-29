@@ -1,0 +1,29 @@
+<% include "../common/head" %>
+
+<link rel="stylesheet" type="text/css" href="../css/index.css">
+
+<div class="main">
+	<h4 class="title">工作内容：</h4>
+	<div class="main-content">
+		<div class="line">
+			<input type="text" id="person-in" class="person-in" placeholder="姓名" value=""></input>
+			<input type="text" id="project-in" class="project-in" placeholder="项目，如：游戏中间页" value=""></input>
+		</div>
+		<div class="line">
+			<input type="text" id="task-in" class="task-in" placeholder="内容" value=""></input>
+			<select id="status-in" class="status-in">
+				<option>开发中</option>
+				<option>待测试</option>
+				<option>测试中</option>
+				<option>测试完</option>
+				<option>已上线</option>
+			</select>
+		</div>
+		<button id="submit" class="submit">添加</button>
+	</div>
+	<div id="list" class="list-wrapper"></div>
+</div>
+
+<script type="text/javascript" src="../js/index.js"></script>
+
+<% include "../common/foot" %>

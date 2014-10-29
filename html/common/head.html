@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>Weekly</title>
+	<script type="text/javascript" src="../dep/X-client/lib.js"></script>
+	<script type="text/javascript" src="../dep/stupid-lib/dist/lib.js"></script>
+	<script type="text/javascript" src="../dep/artTemplate/dist/template.js"></script>
+	<script type="text/javascript" src="../js/util.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+
+	<script id="template-list" type="text/html">
+	<ul class="project-list">
+		{{each projects as project i}}
+		<li class="project-item">
+			<h5 class="project-name">{{project.name}}</h5>
+			<ul class="task-list">
+				{{each project.tasks as task j}}
+				<li class="task-item">
+					<span class="task-num">{{j+1}}. </span>
+					<p class="task-cnt">{{task.cnt}}</p>
+					<span class="task-status">{{if task.status}}[{{task.status}}]{{/if}}</span>
+					<span class="task-person">{{task.person}}</span>
+				</li>
+				{{/each}}
+			</ul>
+		</li>
+		{{/each}}
+	</ul>
+	</script>
+</head>
+<body>
+
+<% include "./icon" %>
+<% include "./header" %>

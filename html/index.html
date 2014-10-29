@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>Weekly</title>
+	<script type="text/javascript" src="../dep/X-client/lib.js"></script>
+	<script type="text/javascript" src="../dep/stupid-lib/dist/lib.js"></script>
+	<script type="text/javascript" src="../dep/artTemplate/dist/template.js"></script>
+	<script type="text/javascript" src="../js/util.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+
+	<script id="template-list" type="text/html">
+	<ul class="project-list">
+		{{each projects as project i}}
+		<li class="project-item">
+			<h5 class="project-name">{{project.name}}</h5>
+			<ul class="task-list">
+				{{each project.tasks as task j}}
+				<li class="task-item">
+					<span class="task-num">{{j+1}}. </span>
+					<p class="task-cnt">{{task.cnt}}</p>
+					<span class="task-status">{{if task.status}}[{{task.status}}]{{/if}}</span>
+					<span class="task-person">{{task.person}}</span>
+				</li>
+				{{/each}}
+			</ul>
+		</li>
+		{{/each}}
+	</ul>
+	</script>
+</head>
+<body>
+
+<svg display="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="756" height="224" viewBox="0 0 756 224">
+<defs>
+
+<g id="icon-out">
+	<path class="path1" d="M30 14c-1.105 0-2 0.896-2 2v12h-24v-12c0-1.104-0.894-2-2-2s-2 0.896-2 2v14c0 1.105 0.894 2 2 2h28c1.105 0 2-0.895 2-2v-14c0-1.104-0.895-2-2-2zM14 20c0 1.105 0.895 2 2 2s2-0.895 2-2v-12h6l-8-8-8 8h6v12z"></path>
+</g>
+
+</svg>
+
+<header class="header">
+	<div class="inner-header">
+		<h1 class="title">
+			<a href="./index.html">Weekly</a>
+			<a id="side-link" class="side-link"></a>
+		</h1>
+	</div>
+</header>
+
+
+<link rel="stylesheet" type="text/css" href="../css/index.css">
+
+<div class="main">
+	<h4 class="title">工作内容：</h4>
+	<div class="main-content">
+		<div class="line">
+			<input type="text" id="person-in" class="person-in" placeholder="姓名" value=""></input>
+			<input type="text" id="project-in" class="project-in" placeholder="项目，如：游戏中间页" value=""></input>
+		</div>
+		<div class="line">
+			<input type="text" id="task-in" class="task-in" placeholder="内容" value=""></input>
+			<select id="status-in" class="status-in">
+				<option>开发中</option>
+				<option>待测试</option>
+				<option>测试中</option>
+				<option>测试完</option>
+				<option>已上线</option>
+			</select>
+		</div>
+		<button id="submit" class="submit">添加</button>
+	</div>
+	<div id="list" class="list-wrapper"></div>
+</div>
+
+<script type="text/javascript" src="../js/index.js"></script>
+
+<footer class="footer">
+	<div class="inner-footer">
+		<p class="about">Weekly@csfe</p>
+	</div>
+</footer>
+
+</body>
+</html>
