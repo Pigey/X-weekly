@@ -91,8 +91,12 @@ X.ready(function(){
         };
 
         Task.create(task, function(err, task){
-            if(err) alert(err);
-            else refreshList();
+            if(err){
+                alert(err);
+            }else{
+                inputs.task.value = '';
+                refreshList();
+            } 
         });
     });
 
