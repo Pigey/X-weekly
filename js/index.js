@@ -70,7 +70,7 @@ X.ready(function(){
     // fetch task list & render list
     var refreshList = function(){
         Task.list({
-            week: util.currWeek,
+            week: util.week,
             person: inputs.person.value
         }, function(err, tasks){
             if(err) alert(err);
@@ -95,7 +95,7 @@ X.ready(function(){
             project: inputs.project.value,
             cnt: inputs.task.value,
             status: inputs.status.value,
-            week: util.currWeek
+            week: util.week
         };
 
         Task.create(task, function(err, task){

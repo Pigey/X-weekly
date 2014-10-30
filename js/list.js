@@ -25,7 +25,7 @@ X.ready(function(){
         }).filter(function(person){
             return exists[person] ? false : (exists[person] = true);
         });
-        personList.innerHTML = '已提交：' + persons.join('，');
+        personList.innerHTML = '已提交：' + (persons.join('，') || '无');
 
         // list
         list.innerHTML = template('template-list', data);
@@ -40,13 +40,13 @@ X.ready(function(){
                 }).join('\r\n\t')
             });
         }).join('\r\n\r\n');
-        downLink.download = 'weekly-' + util.currWeek + '.txt';
+        downLink.download = $.format('周报${begin}-${end}.txt', $.map(util.weekRange, util.formatDate.bind(null, '${y}.${m}.${d}')));
         downLink.href = URL.createObjectURL(new Blob([downContent]));
     };
 
     // get list and render
     Task.list({
-        week: util.currWeek
+        week: util.week
     }, function(err, list){
         if(err){
             alert(err);
