@@ -1,7 +1,11 @@
 X.connect('http://cq01-rdqa-dev056.cq01.baidu.com:8083').config({token:'84054ce010d1ab12ad08dbf0a29e495b'});
 
 var util = {
-    currWeek: Math.ceil(Date.now() / (1000 * 60 * 60 * 24 * 7)),
+    currWeek: (function(d){
+        var day = d.getDay();
+        d -= ((day === 0 ? 7 : day) - 1) * 24 * 60 * 60 * 1000;
+        return Math.ceil(d / (1000 * 60 * 60 * 24 * 7));
+    })(new Date()),
 
     transform: function(taskList){
         var projectMap = {};
