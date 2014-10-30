@@ -29,7 +29,7 @@ var util = {
         };
     },
 
-    struct: {
+    Task: {
         project: 'String',
         person: 'String',
         status: 'String',
