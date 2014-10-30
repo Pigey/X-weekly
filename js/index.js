@@ -14,6 +14,14 @@ var inputs = {
     status: $('#status-in')
 };
 
+// init project & status list
+inputs.project.innerHTML = util.projectSequence.map(function(project){
+    return $.format('<option>${project}</option>', { project: project });
+}).join('');
+inputs.status.innerHTML = util.statusSequence.map(function(status){
+    return $.format('<option>${status}</option>', { status: status });
+}).join('');
+
 // validate inputs method
 var validate = function(){
     var legal = true;

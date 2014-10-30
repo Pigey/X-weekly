@@ -18,6 +18,15 @@ var util = {
         '其他'
     ],
 
+    // sequence of status
+    statusSequence: [
+        '开发中',
+        '待测试',
+        '测试中',
+        '测试完',
+        '已上线'
+    ],
+
     // tasks -> data with project list
     transform: function(taskList){
         var projectSequence = this.projectSequence,
