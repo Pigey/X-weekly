@@ -3,9 +3,10 @@
 // set header-side link
 util.setSideLink('返回', './index.html');
 
+// model Task
+var Task = util.Task;
+
 X.ready(function(){
-    // get model
-    var Task = X.model('Task', util.Task);
 
     // doms
     var main = $('#main'),

@@ -3,6 +3,9 @@
 // set header-side link
 util.setSideLink('本周周报', './list.html');
 
+// model Task
+var Task = util.Task;
+
 // doms
 var list = $('#list');
 
@@ -40,8 +43,6 @@ var validate = function(){
 localStorage.username && (inputs.person.value = localStorage.username);
 
 X.ready(function(){
-    // get model
-    var Task = X.model('Task', util.Task);
 
     // render list & bind events
     var renderList = function(tasks){

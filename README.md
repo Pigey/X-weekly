@@ -17,7 +17,7 @@ csfe周报工具，欢迎添加代码！！
 
 > 页面中的`$`不是jQuery！是一个简单的[DOM操作工具](https://github.com/nighca/lib)，API可以看源码（`dep/stupid-lib/lib.js`）。
 
-> `X`是后端存储服务框架的前端接口，源码位置在`dep/X-client/lib.js`，所有关于Model的增删查改操作需要在`X.ready(function(){...})`中执行。
+> `X`是后端存储服务框架的前端接口，源码位置在`dep/x-client/dist/X.js`，所有关于Model的增删查改操作需要在`X.ready(function(){...})`中执行。
 
 ### css
 
@@ -26,3 +26,5 @@ csfe周报工具，欢迎添加代码！！
 ### 部署服务
 
 静态serve代码目录，在浏览器中打开`html/index.html`该文件即可
+
+数据通过[X](https://github.com/nighca/X)服务存储在cq01-rdqa-dev056.cq01.baidu.com，accessToken为`84054ce010d1ab12ad08dbf0a29e495b`

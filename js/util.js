@@ -1,6 +1,7 @@
 (function(){
 
-X.connect('http://localhost:8083').config({token:'84054ce010d1ab12ad08dbf0a29e495b'});
+// do connect & config X
+X.connect('http://cq01-rdqa-dev056.cq01.baidu.com:8083').config({ token:'84054ce010d1ab12ad08dbf0a29e495b' });
 
 // length of one day
 var oneDay = 24 * 60 * 60 * 1000;
@@ -24,8 +25,7 @@ var getWeekRange = function(week){
     var d = new Date(week * 7 * oneDay);
     return {
         begin: new Date(+d - (d.getDay() - 1) * oneDay),
-        end: new Date(+d + (7 - d.getDay()) * oneDay),
-        d: d
+        end: new Date(+d + (7 - d.getDay()) * oneDay)
     }
 };
 
@@ -62,6 +62,15 @@ var statusSequence = [
     '测试完',
     '已上线'
 ];
+
+// struct/schema of Task
+var taskStruct = {
+    project: 'String',
+    person: 'String',
+    status: 'String',
+    cnt: 'String',
+    week: 'Number'
+};
 
 // export util
 window.util = {
@@ -109,14 +118,8 @@ window.util = {
         };
     },
 
-    // task struct
-    Task: {
-        project: 'String',
-        person: 'String',
-        status: 'String',
-        cnt: 'String',
-        week: 'Number'
-    },
+    // get model
+    Task: X.model('Task', taskStruct),
 
     // set header-side link
     setSideLink: function(name, url){
