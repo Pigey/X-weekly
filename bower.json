@@ -14,6 +14,7 @@
   ],
   "dependencies": {
     "stupid-lib": "~1.2.0",
-    "artTemplate": "https://github.com/aui/artTemplate.git#~3.0.1"
+    "artTemplate": "https://github.com/aui/artTemplate.git#~3.0.1",
+    "x-client": "~0.1.1"
   }
 }
