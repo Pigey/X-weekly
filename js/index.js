@@ -60,7 +60,7 @@ X.ready(function(){
                 Task.remove({
                     _id: taskId
                 }, function(err, result){
-                    if(err) alert(err);
+                    if(err) util.handleError(err);
                     else refreshList();
                 });
             });
@@ -73,7 +73,7 @@ X.ready(function(){
             week: util.week,
             person: inputs.person.value
         }, function(err, tasks){
-            if(err) alert(err);
+            if(err) util.handleError(err);
             else renderList(tasks);
         });
     };
@@ -100,7 +100,7 @@ X.ready(function(){
 
         Task.create(task, function(err, task){
             if(err){
-                alert(err);
+                util.handleError(err);
             }else{
                 inputs.task.value = '';
                 refreshList();

@@ -49,7 +49,7 @@ X.ready(function(){
         week: util.week
     }, function(err, list){
         if(err){
-            alert(err);
+            util.handleError(err);
         }else{
             renderList(list);
             main.show();
