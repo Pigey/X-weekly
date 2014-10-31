@@ -17,13 +17,13 @@ csfe周报工具，欢迎添加代码！！
 
 * 安装依赖
 
-	bower install
+		bower install
 
 * 注意
 
-	> 页面中的`$`不是jQuery！是一个简单的[DOM操作工具](https://github.com/nighca/lib)，API可以看源码（`dep/stupid-lib/lib.js`）。
+	* 页面中的`$`不是jQuery！是一个简单的[DOM操作工具](https://github.com/nighca/lib)，API可以看源码（`dep/stupid-lib/lib.js`）。
 
-	> `X`是后端存储服务框架的前端接口，源码位置在`dep/x-client/dist/X.js`，所有关于Model的增删查改操作需要在`X.ready(function(){...})`中执行。
+	* `X`是后端存储服务框架的前端接口，源码位置在`dep/x-client/dist/X.js`，所有关于Model的增删查改操作需要在`X.ready(function(){...})`中执行。
 
 ### css
 
