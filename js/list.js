@@ -46,7 +46,7 @@ var renderList = function(tasks){
         mailto: 'zuming@baidu.com',
         cc: 'csfe@baidu.com',
         subject: $.format('游戏特卖周报${date}', { date: util.formatDate('${y}-${m}-${d}', new Date()) }),
-        //body: plainContent
+        body: plainContent
     }, encodeURIComponent));
 
     // dowload link
