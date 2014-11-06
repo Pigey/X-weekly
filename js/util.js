@@ -63,15 +63,6 @@ var statusSequence = [
     '已上线'
 ];
 
-// struct/schema of Task
-var taskStruct = {
-    project: 'String',
-    person: 'String',
-    status: 'String',
-    cnt: 'String',
-    week: 'Number'
-};
-
 // export util
 window.util = {
     week: week,
@@ -119,7 +110,7 @@ window.util = {
     },
 
     // get model
-    Task: X.model('Task', taskStruct),
+    Task: X.model('Task'),
 
     // set header-side link
     setSideLink: function(name, url){
