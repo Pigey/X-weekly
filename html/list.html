@@ -31,6 +31,16 @@
 		{{/each}}
 	</ul>
 	</script>
+
+	<script id="template-history-list" type="text/html">
+	<ul class="week-list">
+		{{each weeks as week i}}
+		<li class="week-item">
+			<a href="./list.html?week={{week.id}}">{{week.range.begin}}</a>
+		</li>
+		{{/each}}
+	</ul>
+	</script>
 </head>
 <body>
 
