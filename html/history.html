@@ -36,7 +36,12 @@
 	<ul class="week-list">
 		{{each weeks as week i}}
 		<li class="week-item">
-			<a href="./list.html?week={{week.id}}">{{week.range.begin}}</a>
+			<a href="./list.html?week={{week.id}}">
+				<span class="week-year">[{{week.year}}]</span>
+				<span class="week-begin">{{week.range.begin}}</span>
+				-
+				<span class="week-end">{{week.range.end}}</span>
+			</a>
 		</li>
 		{{/each}}
 	</ul>

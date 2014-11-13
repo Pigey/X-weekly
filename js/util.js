@@ -1,7 +1,7 @@
 (function(){
 
 // do connect & config X
-X.connect('http://localhost:8083').config({ token:'84054ce010d1ab12ad08dbf0a29e495b' });
+X.connect('http://cq01-rdqa-dev056.cq01.baidu.com:8083').config({ token:'84054ce010d1ab12ad08dbf0a29e495b' });
 
 // length of one day
 var oneDay = 24 * 60 * 60 * 1000;
@@ -11,6 +11,11 @@ var getQuery = function(key, process){
     if(!location.search) return null;
     for(var search = location.search.slice(1).split('&'), l = search.length, i = 0, kv; i < l; i++)
         if((kv = search[i].split('='))[0] === key) return process ? process(kv[1]) : kv[1];
+};
+
+// to given length
+var toLen = function(source, len){
+    return (Array.prototype.join.call({length:len + 1}, '0') + source).slice(-len);
 };
 
 // get week
@@ -32,9 +37,9 @@ var getWeekRange = function(week){
 // format date
 var formatDate = function(tpl, d){
     return $.format(tpl || '${y}.${m}.${d}', {
-        y: d.getFullYear(),
-        m: d.getMonth() + 1,
-        d: d.getDate()
+        y: toLen(d.getFullYear(), 4),
+        m: toLen(d.getMonth() + 1, 2),
+        d: toLen(d.getDate(), 2)
     });
 };
 
@@ -66,6 +71,8 @@ var statusSequence = [
 // export util
 window.util = {
     week: week,
+
+    toLen: toLen,
 
     weekRange: weekRange,
 

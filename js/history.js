@@ -16,9 +16,11 @@ var renderHistoryList = function(weeks){
         weeks: weeks.sort(function(a, b){
             return a < b;
         }).map(function(week){
+            var range = util.getWeekRange(week);
             return {
                 id: week,
-                range: $.map(util.getWeekRange(week), util.formatDate.bind(null, '${y}.${m}.${d}'))
+                year: util.formatDate('${y}', range.begin),
+                range: $.map(range, util.formatDate.bind(null, '${m}.${d}'))
             };
         })
     });
