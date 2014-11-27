@@ -26,14 +26,22 @@ var renderHistoryList = function(weeks){
     });
 };
 
-// get list and render
-Task.distinct('week', function(err, weeks){
-    if(err){
-        util.handleError(err);
-    }else{
-        renderHistoryList(weeks);
-        main.show();
-    }
-});
+// fetch list and render
+var refreshList = function(){
+    Task.distinct('week', function(err, weeks){
+        if(err){
+            util.handleError(err);
+        }else{
+            renderHistoryList(weeks);
+            main.show();
+        }
+    });
+};
+
+// update list if changes happen
+Task.on('change', refreshList);
+
+// initialize
+refreshList();
 
 })();
