@@ -13,7 +13,7 @@ var main = $('#main'),
     mailLink = $('#mail-link'),
     downLink = $('#down-link');
 
-// render list method
+// render list
 var renderList = function(tasks){
     // do transform (task list -> data including projects)
     var data = util.transform(tasks);
@@ -54,16 +54,24 @@ var renderList = function(tasks){
     downLink.href = URL.createObjectURL(new Blob([plainContent]));
 };
 
-// get list and render
-Task.list({
-    week: util.week
-}, function(err, list){
-    if(err){
-        util.handleError(err);
-    }else{
-        renderList(list);
-        main.show();
-    }
-});
+// fetch list and render
+var refreshList = function(){
+    Task.list({
+        week: util.week
+    }, function(err, list){
+        if(err){
+            util.handleError(err);
+        }else{
+            renderList(list);
+            main.show();
+        }
+    });
+};
+
+// update list if changes happen
+Task.on('change', refreshList);
+
+// initialize
+refreshList();
 
 })();

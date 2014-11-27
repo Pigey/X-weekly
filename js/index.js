@@ -49,7 +49,6 @@ var renderList = function(tasks){
                 _id: taskId
             }, function(err, result){
                 if(err) util.handleError(err);
-                else refreshList();
             });
         });
     });
@@ -91,10 +90,11 @@ $('#submit').on('click', function(e){
             util.handleError(err);
         }else{
             inputs.task.value = '';
-            refreshList();
         } 
     });
 });
+
+Task.on('change', refreshList);
 
 // init project & status option list
 inputs.project.innerHTML = util.projectSequence.map(function(project){
