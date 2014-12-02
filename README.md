@@ -1,7 +1,7 @@
-Weekly
+X-weekly
 ========
 
-csfe周报工具，欢迎添加代码！！
+基于[X](https://github.com/nighca/X) & [X-client](https://github.com/nighca/X-client) 开发的一个周报系统
 
 ## 开发
 
@@ -9,9 +9,7 @@ csfe周报工具，欢迎添加代码！！
 
 页面源代码在`html/common`（公共部分）及`html/page`（各页面主体）下，通过`html/build.js`（一个很简单的模板引擎）构建，在`html/`下生成结果文件，`html/page`中每个文件将对应生成一个同名文件。
 
-	cd html
-
-	node build.js
+	node html/build.js
 
 ### js
 
@@ -31,6 +29,6 @@ csfe周报工具，欢迎添加代码！！
 
 ### 部署服务
 
-静态serve代码目录，在浏览器中打开`html/index.html`该文件即可
+静态serve代码目录，在浏览器中打开`index.html`该文件即可
 
-数据通过[X](https://github.com/nighca/X)服务存储在cq01-rdqa-dev056.cq01.baidu.com，accessToken为`84054ce010d1ab12ad08dbf0a29e495b`
+数据通过[X](https://github.com/nighca/X)服务存储在104.236.176.244，accessToken为`a1943f0a9991c7279b93ea8fa57d3cdf`
