@@ -1,7 +1,7 @@
 {
   "name": "weekly",
   "version": "0.0.1",
-  "homepage": "http://cq01-rdqa-dev056.cq01.baidu.com:8090/weekly/html/",
+  "homepage": "http://nighco/weekly/",
   "authors": [],
   "license": "none",
   "ignore": [
@@ -15,6 +15,6 @@
   "dependencies": {
     "stupid-lib": "~1.2.0",
     "artTemplate": "https://github.com/aui/artTemplate.git#~3.0.1",
-    "x-client": "~0.4.0"
+    "x-client": "~1.0.0"
   }
 }
