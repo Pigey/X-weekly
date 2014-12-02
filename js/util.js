@@ -51,21 +51,19 @@ var weekRange = getWeekRange(week);
 
 // sequence of projects
 var projectSequence = [
-    '游戏中间页',
-    '游戏PS',
-    '游戏商业系统',
-    '特卖知心',
-    '爱玩小游戏',
+    '公司事务',
+    '阅读',
+    '写作',
+    '外包',
+    '个人项目',
     '其他'
 ];
 
 // sequence of status
 var statusSequence = [
-    '开发中',
-    '待测试',
-    '测试中',
-    '测试完',
-    '已上线'
+    '计划中',
+    '进行中',
+    '已完成'
 ];
 
 // export util
