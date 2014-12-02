@@ -60,10 +60,11 @@ var removeExt = function(fileName){
 
 // config
 
-var basePath = process.cwd(),
+var basePath = __dirname,
+    currPath = process.cwd(),
     commonPath = path.join(basePath, 'common'),
     pagePath = path.join(basePath, 'page'),
-    distPath = path.join(basePath, '');
+    distPath = path.join(currPath, '');
 
 var includePattern = /<\%\s*include\s*\"([^\"]+)\"\s*\%\>/g;
 
