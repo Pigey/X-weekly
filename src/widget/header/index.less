@@ -1,0 +1,46 @@
+/*
+ * @file style for header
+ * @author nighca <nighca@live.cn>
+ */
+
+@import "~widget/util/index.less";
+
+.header {
+    border-bottom: 1px solid #eee;
+
+    .inner-header {
+        .center();
+        position: relative;
+    }
+
+    .title {
+        line-height: 64px;
+        font-size: 32px;
+    }
+
+    .sub-title {
+        color: #B0AFAF;
+        font-weight: normal;
+    }
+
+    .side-link-list {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        line-height: 64px;
+
+        font-size: 14px;
+        font-weight: normal;
+
+        .side-link {
+            display: inline-block;
+            width: 70px;
+            margin-right: 10px;
+            text-align: center;
+
+            &.active {
+                font-weight: bold;
+            }
+        }
+    }
+}
