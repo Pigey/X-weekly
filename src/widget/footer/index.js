@@ -10,7 +10,7 @@ import React from 'react'
 class Footer extends React.Component {
   render() {
     return (
-      <footer className='footer'>
+      <footer className='w-footer'>
         <div className="inner-footer">
           <p className="about">Weekly @ csfe</p>
         </div>

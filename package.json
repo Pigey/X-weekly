@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "webpack-dev-server --inline --hot"
+    "serve": "webpack-dev-server --inline --hot --port 8088 --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
     "css-loader": "^0.23.0",
+    "json-loader": "^0.5.3",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "style-loader": "^0.13.0",

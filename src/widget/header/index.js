@@ -11,7 +11,7 @@ import { Link, IndexLink } from 'react-router'
 class Header extends React.Component {
   render() {
     return (
-      <header className='header'>
+      <header className='w-header'>
         <div className='inner-header'>
           <h1 className='title'>
             <Link to='./index.html'>

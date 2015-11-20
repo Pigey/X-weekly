@@ -1,0 +1,84 @@
+/*
+ * @file style for task item
+ * @author nighca <nighca@live.cn>
+ */
+
+@import "~widget/util/index";
+
+.w-task-item {
+    position: relative;
+    padding: 0 150px 0 30px;
+    margin: 15px 0;
+    transition: .5s;
+
+    .task-num{
+        position: absolute;
+        left: 0;
+        top: 0;
+        text-align: right;
+        width: 25px;
+    }
+
+    .task-cnt{
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    .task-status{
+        .ellipsis();
+        position: absolute;
+        top: 0;
+        right: 60px;
+        width: 70px;
+    }
+
+    .task-person{
+        .ellipsis();
+        position: absolute;
+        top: 0;
+        right: 0px;
+        width: 50px;
+    }
+
+    .task-img-line {
+        margin-top: 10px;
+        font-size: 0;
+        img {
+            box-sizing: border-box;
+            width: 29.33%;
+            margin: 2%;
+            padding: 10px;
+            vertical-align: top;
+            box-shadow: 0px 1px 1px #A2A2A2;
+        }
+
+        @media print{
+            img {
+                box-shadow: none;
+            }
+        }
+    }
+
+    .op-remove{
+        display: none;
+        position: absolute;
+        top: 0;
+        right: -20px;
+        width: 20px;
+
+        text-align: center;
+        cursor: pointer;
+        font-family: cursive;
+        font-size: 12px;
+
+        transition: .5s;
+
+        &:hover{
+            font-weight: bold;
+        }
+    }
+
+    &:hover .op-remove{
+        display: block;
+    }
+}
