@@ -3,6 +3,8 @@
  * @author nighca <nighca@live.cn>
  */
 
+import 'babel-polyfill'
+
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute } from 'react-router'
@@ -19,8 +21,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header></Header>
-        {this.props.children}
+        {this.props.header}
+        {this.props.main}
         <Footer></Footer>
       </div>
     )
@@ -30,10 +32,17 @@ class App extends React.Component {
 render((
   <Router>
     <Route path="/" component={App}>
-      <IndexRoute component={Home} />
-      <Route path="home" component={Home} />
-      <Route path="list" component={List} />
-      <Route path="history" component={History} />
+      <IndexRoute components={{ header: Header, main: Home }} />
+
+      <Route path="home" components={{ header: Header, main: Home }}>
+        <Route path=":week" />
+      </Route>
+
+      <Route path="list" components={{ header: Header, main: List }}>
+        <Route path=":week" />
+      </Route>
+
+      <Route path="history" components={{ header: Header, main: History }} />
     </Route>
   </Router>
 ), document.getElementById('app-container'))
