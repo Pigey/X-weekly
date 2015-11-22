@@ -26,7 +26,7 @@ export default class Model {
 
 }
 
-['list', 'get', 'distinct', 'create', 'remove', 'update'].forEach((name) => {
+['list', 'get', 'distinct', 'create', 'remove', 'update'].forEach(name => {
   Model[name] = function (...args) {
     return this.model.then((model) => {
       return new Promise((resolve, reject) => {
@@ -40,4 +40,34 @@ export default class Model {
       })
     })
   }
+})
+
+let cachable = function (name, method) {
+  return function (...args) {
+    const Model = this
+
+    if (!Model.cache) {
+      Model.cache = {}
+      Model.model.then((model) => {
+        model.on('change', function () {
+          console.log('clean', Model.modelName)
+          Model.cache = {}
+        })
+      })
+    }
+
+    const cache = Model.cache[name] = Model.cache[name] || {}
+    const key = JSON.stringify(args.map(arg => (arg === undefined ? null : arg)))
+    if (cache.hasOwnProperty(key)) {
+      console.log('hit', Model.modelName, name, key)
+      return cache[key]
+    }
+
+    console.log('mis', Model.modelName, name, key)
+    return (cache[key] = method.apply(this, args))
+  }
+}
+
+;['list', 'get', 'distinct'].forEach(name => {
+  Model[name] = cachable(name, Model[name])
 })
