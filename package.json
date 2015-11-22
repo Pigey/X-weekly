@@ -20,7 +20,6 @@
   "devDependencies": {
     "babel-core": "^6.2.0",
     "babel-loader": "^6.2.0",
-    "babel-plugin-transform-object-assign": "^6.1.18",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
     "css-loader": "^0.23.0",
@@ -32,6 +31,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.2.0",
     "history": "^1.13.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
