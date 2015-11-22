@@ -12,14 +12,15 @@ export default React.createClass ({
 
   getDefaultProps: function () {
     return {
-      projects: []
+      projects: [],
+      showPerson: true
     }
   },
 
   render: function () {
     let projects = this.props.projects.map(project => {
       return (
-        <ProjectItem key={project.name} name={project.name} tasks={project.tasks} />
+        <ProjectItem key={project.name} name={project.name} tasks={project.tasks} showPerson={this.props.showPerson} />
       )
     })
 

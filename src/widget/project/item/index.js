@@ -9,12 +9,20 @@ import React from 'react'
 import TaskList from 'widget/task/list'
 
 export default React.createClass ({
+  getDefaultProps: function () {
+    return {
+      name: '',
+      tasks: [],
+      showPerson: true
+    }
+  },
+
   render: function () {
     return (
       <li className="w-project-item">
-				<h5 className="project-name">{this.props.name}</h5>
-				<TaskList tasks={this.props.tasks} />
-			</li>
+        <h5 className="project-name">{this.props.name}</h5>
+        <TaskList tasks={this.props.tasks} showPerson={this.props.showPerson} />
+      </li>
     )
   }
 })
