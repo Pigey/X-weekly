@@ -8,15 +8,24 @@ import './index.less'
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
 
-class Header extends React.Component {
-  render() {
+import weeker from 'mixin/weeker'
+import { getWeekRange, formatDate } from 'widget/util'
+
+export default React.createClass ({
+
+  mixins: [weeker],
+
+  render: function () {
+    let week = this.getWeek()
+    let monday = formatDate(getWeekRange(week).begin)
+
     return (
       <header className='w-header'>
         <div className='inner-header'>
           <h1 className='title'>
-            <Link to='./index.html'>
+            <Link to='/'>
               WEEKLY
-              <span className='sub-title'></span>
+              <span className='sub-title'>{monday}</span>
             </Link>
             <p className='side-link-list'>
               <IndexLink className='side-link' activeClassName='active' to='/'>HOME</IndexLink>
@@ -28,6 +37,5 @@ class Header extends React.Component {
       </header>
     )
   }
-}
 
-export default Header
+})
