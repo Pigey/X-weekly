@@ -1,2 +1,5 @@
-# bower
-dep
+# node_modules
+node_modules
+
+# x config
+config/x.json

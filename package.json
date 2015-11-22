@@ -1,0 +1,41 @@
+{
+  "name": "x-weekly",
+  "version": "0.0.1",
+  "description": "weekly realized with X",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack-dev-server --inline --hot --port 8088 --host 0.0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nighca/X-weekly.git"
+  },
+  "author": "nighca@live.cn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nighca/X-weekly/issues"
+  },
+  "homepage": "https://github.com/nighca/X-weekly#readme",
+  "devDependencies": {
+    "babel-core": "^6.2.0",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "css-loader": "^0.23.0",
+    "json-loader": "^0.5.3",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.6",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.2.0",
+    "history": "^1.13.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-router": "^1.0.0",
+    "x-client": "^1.0.0"
+  }
+}
