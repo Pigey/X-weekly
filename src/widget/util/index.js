@@ -19,8 +19,13 @@ export let toLen = function (source, len) {
 }
 
 // get week
-export let getWeek = function (d) {
-    let day = (new Date(d = (d || Date.now()))).getDay()
+export let getWeek = function (week) {
+    if (!isNaN(week = parseInt(week, 10))) {
+        return week
+    }
+
+    let d = Date.now()
+    let day = (new Date(d)).getDay()
     d -= ((day === 0 ? 7 : day) - 1) * oneDay
     return Math.ceil(d / (oneDay * 7))
 }
@@ -35,12 +40,11 @@ export let getWeekRange = function (week) {
 }
 
 // format date
-export let formatDate = function (tpl, d) {
-    return $.format(tpl || '${y}.${m}.${d}', {
-        y: toLen(d.getFullYear(), 4),
-        m: toLen(d.getMonth() + 1, 2),
-        d: toLen(d.getDate(), 2)
-    })
+export let formatDate = function (date) {
+    let y = toLen(date.getFullYear(), 4)
+    let m = toLen(date.getMonth() + 1, 2)
+    let d = toLen(date.getDate(), 2)
+    return `${y}.${m}.${d}`
 }
 
 export let tasksToProjects = function (tasks) {
