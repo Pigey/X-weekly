@@ -17,7 +17,7 @@ import {
   Task as TaskModel
 } from 'model'
 
-import { tasksToProjects } from 'widget/util'
+import { tasksToProjects } from 'util'
 
 export default React.createClass ({
 

@@ -3,7 +3,7 @@
  * @author nighca <nighca@live.cn>
  */
 
-import { getWeek } from 'widget/util'
+import { getWeek } from 'util'
 
 export default {
 

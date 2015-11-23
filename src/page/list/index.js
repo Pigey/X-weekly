@@ -9,7 +9,7 @@ import React from 'react'
 import weeker from 'mixin/weeker'
 import ProjectList from 'widget/project/list'
 import { Task as TaskModel } from 'model'
-import { formatDate, tasksToProjects, makeMailLink } from 'widget/util'
+import { formatDate, tasksToProjects, makeMailLink } from 'util'
 
 export default React.createClass ({
 

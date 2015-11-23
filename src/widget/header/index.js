@@ -9,7 +9,7 @@ import React from 'react'
 import { Link, IndexLink } from 'react-router'
 
 import weeker from 'mixin/weeker'
-import { getWeekRange, formatDate } from 'widget/util'
+import { getWeekRange, formatDate } from 'util'
 
 export default React.createClass ({
 

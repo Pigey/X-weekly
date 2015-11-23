@@ -7,7 +7,7 @@ import './index.less'
 
 import React from 'react'
 import { Link } from 'react-router'
-import { toLen, getWeekRange } from 'widget/util'
+import { toLen, getWeekRange } from 'util'
 
 export default React.createClass ({
   getDefaultProps: function () {
