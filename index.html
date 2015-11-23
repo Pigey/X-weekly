@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-	<title>WEEKLY</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>WEEKLY</title>
 </head>
 <body>
-	<div id="app-container"></div>
-	<script src="./dist/app.js"></script>
+    <div id="app-container"></div>
+    <script>
+        // parse params
+        var params = window.location.search.slice(1).split('&').map(function (kv) {
+            return kv.split('=').map(decodeURIComponent);
+        }).filter(function (kv) {
+            return kv[0];
+        }).reduce(
+            function (params, kv) {
+                params[kv[0]] = kv[1] || '';
+                return params;
+            },
+            {}
+        );
+
+        // method for script-insert
+        var insertScript = window.insertScript = function (url) {
+            document.write('<script charset="utf-8" src="' + url + '"><\/script>');
+        };
+
+        // dev
+        if (params.hasOwnProperty('dev')) {
+            insertScript('./dist/app.js');
+        // production
+        } else {
+            insertScript('./dist/entry.js');
+        }
+    </script>
 </body>
 </html>
