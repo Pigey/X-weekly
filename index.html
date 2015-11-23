@@ -30,7 +30,7 @@
             insertScript('./dist/app.js');
         // production
         } else {
-            insertScript('./dist/entry.js');
+            insertScript('./dist/entry.js?' + Date.now());
         }
     </script>
 </body>
