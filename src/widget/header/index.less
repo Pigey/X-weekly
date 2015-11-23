@@ -5,6 +5,12 @@
 
 @import "~util/index";
 
+@headerHeight: 90px;
+
+.main {
+    margin-top: @headerHeight;
+}
+
 .w-header {
     position: fixed;
     width: 100%;
@@ -12,8 +18,9 @@
     left: 0;
     z-index: 11;
 
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, .9);
     border-bottom: 1px solid #eee;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
 
     .inner-header {
         .center();
@@ -21,24 +28,28 @@
     }
 
     .title {
-        line-height: 64px;
-        font-size: 32px;
+        line-height: @headerHeight;
+        font-size: 36px;
+        letter-spacing: 2px;
     }
 
     .sub-title {
         margin-left: 5px;
+
         color: #B0AFAF;
         font-weight: normal;
+        letter-spacing: 1px;
     }
 
     .side-link-list {
         position: absolute;
         bottom: 0;
         right: 0;
-        line-height: 64px;
+        line-height: @headerHeight;
 
         font-size: 14px;
         font-weight: normal;
+        letter-spacing: 1px;
 
         .side-link {
             display: inline-block;

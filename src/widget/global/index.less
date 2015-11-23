@@ -9,6 +9,7 @@
 * {
     margin: 0;
     padding: 0;
+    line-height: 1.58;
 
     -webkit-box-sizing: content-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: content-box;    /* Firefox, other Gecko */
@@ -28,9 +29,13 @@ html, body {
     height: 100%;
 }
 
+.default-font () {
+    font-family: Helvetica, arial, "Helvetica Neue", Helvetica, arial, "Source Han Sans", "Microsoft YaHei", sans-serif;
+}
+
 body {
+    .default-font();
     color: #333;
-    font-family: "Helvetica Neue", Helvetica, arial, "Microsoft YaHei";
 }
 
 input {
@@ -55,6 +60,7 @@ input[type="text"], input[type="password"], input[type="url"], div[contentEditab
     &::-moz-input-placeholder { color:#a8a8a8;  }
     &::-webkit-input-placeholder { color:#a8a8a8; }
 
+    .default-font();
     font-size: 14px;
     border-style: none;
     background: none;
@@ -67,8 +73,6 @@ input[type="text"], input[type="password"], input[type="url"], div[contentEditab
     &:invalid, &.invalid{
         background-color: rgba(255, 6, 6, 0.1);
     }
-
-    font-family: "Helvetica Neue", Helvetica, arial, "Microsoft YaHei";
 }
 
 input[type="text"], input[type="password"], input[type="url"], div[contentEditable="true"] {
@@ -129,9 +133,6 @@ table {
 
 .main {
     .center();
-
-    margin-top: 64px;
     padding: 40px 0 0;
-
     min-height: 200px;
 }

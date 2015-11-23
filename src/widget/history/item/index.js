@@ -27,7 +27,7 @@ export default React.createClass ({
       return (
         <span className={`week-${role}`}>
           <span className='year'>{y}</span>
-          <span className='date'>{m} . {d}</span>
+          <span className='date'>{m}.{d}</span>
         </span>
       )
     }

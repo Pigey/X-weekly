@@ -12,7 +12,7 @@ class Footer extends React.Component {
     return (
       <footer className='w-footer'>
         <div className="inner-footer">
-          <p className="about">Weekly @ csfe</p>
+          <p className="about">WEEKLY @ CSFE</p>
         </div>
       </footer>
     )

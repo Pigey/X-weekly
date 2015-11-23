@@ -93,16 +93,24 @@ export default React.createClass ({
       person => finishedPersons.indexOf(person) < 0
     )
 
+    let finishedPersonLine = finishedPersons.length
+      ? <p>已提交：{finishedPersons.join(' , ')}</p>
+      : <p>无人提交。</p>
+
+    let unfinishedPersonLine = unfinishedPersons.length
+      ? <p>未提交：{unfinishedPersons.join(', ')}</p>
+      : ''
+
     return (
       <div className='main p-list'>
         <h5 className='operation-line'>
-          <a target='_blank' href={links.mail}>Email</a>
           <a target='_blank' href={links.down}>Download</a>
+          <a target='_blank' href={links.mail}>Email</a>
         </h5>
         <ProjectList projects={projects} showRemove={false} />
         <div className='person-line'>
-          <p>已提交：{finishedPersons.join(', ')}</p>
-          <p>未提交：{unfinishedPersons.join(', ')}</p>
+          {finishedPersonLine}
+          {unfinishedPersonLine}
         </div>
       </div>
     )
