@@ -63,3 +63,8 @@ export let tasksToProjects = function (tasks) {
         .map(name => projectMap[name])
         .sort((a, b) => (a.name > b.name ? 1 : -1))
 }
+
+export let makeMailLink = function ({ mailto, cc, subject, body }) {
+    [mailto, cc, subject, body] = [mailto, cc, subject, body].map(encodeURIComponent)
+    return `mailto:${mailto}?cc=${cc}&subject=${subject}&body=${body}`
+}
