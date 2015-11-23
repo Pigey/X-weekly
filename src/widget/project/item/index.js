@@ -13,7 +13,8 @@ export default React.createClass ({
     return {
       name: '',
       tasks: [],
-      showPerson: true
+      showPerson: true,
+      showRemove: true
     }
   },
 
@@ -21,7 +22,10 @@ export default React.createClass ({
     return (
       <li className="w-project-item">
         <h5 className="project-name">{this.props.name}</h5>
-        <TaskList tasks={this.props.tasks} showPerson={this.props.showPerson} />
+        <TaskList 
+          tasks={this.props.tasks} 
+          showPerson={this.props.showPerson}
+          showRemove={this.props.showRemove} />
       </li>
     )
   }

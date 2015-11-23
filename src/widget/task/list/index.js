@@ -12,14 +12,20 @@ export default React.createClass ({
   getDefaultProps: function () {
     return {
       tasks: [],
-      showPerson: true
+      showPerson: true,
+      showRemove: true
     }
   },
 
   render: function () {
     let tasks = this.props.tasks.map((task, index) => {
       return (
-        <TaskItem key={task._id} index={index} showPerson={this.props.showPerson} {...task} />
+        <TaskItem 
+          key={task._id} 
+          index={index} 
+          showPerson={this.props.showPerson} 
+          showRemove={this.props.showRemove} 
+          {...task} />
       )
     })
 

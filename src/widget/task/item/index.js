@@ -13,7 +13,8 @@ export default React.createClass ({
   getDefaultProps: function () {
     return {
       imgs: [],
-      showPerson: true
+      showPerson: true,
+      showRemove: true
     }
   },
 
@@ -24,11 +25,8 @@ export default React.createClass ({
   },
 
   render: function () {
-    let className = 'w-task-item' + (
-      this.props.showPerson
-      ? ''
-      : ' no-person'
-    )
+    let { showPerson, showRemove } = this.props
+    let className = `w-task-item${showPerson ? '' : ' no-person'}${showRemove ? '' : ' no-remove'}`
     let imgs = this.props.imgs.map(img => <img src={img} />)
 
     return (
