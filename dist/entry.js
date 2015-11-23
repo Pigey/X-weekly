@@ -1,0 +1,1 @@
+window.insertScript('./dist/app.379afb2de976bd549c02.js');
