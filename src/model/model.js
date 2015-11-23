@@ -58,13 +58,17 @@ let cachable = function (name, method) {
 
     const cache = Model.cache[name] = Model.cache[name] || {}
     const key = JSON.stringify(args.map(arg => (arg === undefined ? null : arg)))
-    if (cache.hasOwnProperty(key)) {
-      console.log('hit', Model.modelName, name, key)
-      return cache[key]
-    }
 
-    console.log('mis', Model.modelName, name, key)
-    return (cache[key] = method.apply(this, args))
+    // wait for cache-clean
+    return Promise.resolve().then(function () {
+      if (cache.hasOwnProperty(key)) {
+        console.log('hit', Model.modelName, name, key)
+        return cache[key]
+      }
+
+      console.log('mis', Model.modelName, name, key)
+      return cache[key] = method.apply(Model, args)
+    })
   }
 }
 
