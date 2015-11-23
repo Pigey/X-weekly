@@ -6,6 +6,7 @@
 import './index.less'
 
 import React from 'react'
+import { throttle } from 'util'
 
 export default React.createClass ({
 
@@ -25,14 +26,14 @@ export default React.createClass ({
     }
   },
 
-  handleChange: function () {
+  handleChange: throttle(function () {
     this.validate()
-  },
+  }),
 
-  handlePersonChange: function (e) {
+  handlePersonChange: throttle(function (e) {
     this.handleChange(e)
     this.props.onPersonChange(e.target.value.trim())
-  },
+  }),
 
   handleSubmit: function (e) {
     e.preventDefault()
