@@ -1,3 +1,8 @@
+/*
+ * @file webpack config for develop
+ * @author nighca <nighca@live.cn>
+ */
+
 var path = require('path');
 
 module.exports = {
