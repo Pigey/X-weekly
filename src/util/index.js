@@ -59,9 +59,28 @@ export function tasksToProjects (tasks) {
         return projectMap
     }, {})
 
+    // pre-set sequence
+    let sequence = [
+        '糯米-PC端',
+        '糯米-WAP端',
+        '糯米-组件化',
+        '组件化开发平台',
+        'API开放(鸿鹄)平台',
+        '小游戏',
+        '其他'
+    ]
+
+    // compare method for sort by pre-set sequence
+    let compare = function (a, b) {
+        [a, b] = [a, b]
+            .map(item => sequence.indexOf(item.name))
+            .map(item => (item >= 0 ? item : 99999))
+        return a - b
+    }
+
     return Object.keys(projectMap)
         .map(name => projectMap[name])
-        .sort((a, b) => (a.name > b.name ? 1 : -1))
+        .sort(compare)
 }
 
 export function makeMailLink ({ mailto, cc, subject, body }) {
