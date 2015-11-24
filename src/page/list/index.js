@@ -98,6 +98,9 @@ export default React.createClass ({
       : <ProjectList projects={projects} showRemove={false} />
 
     let links = this.getLinks(projects)
+    let weekRange = this.getWeekRange()
+    let [ beginDate, endDate ] = [ weekRange.begin, weekRange.end ].map(formatDate)
+    let downloadName = `周报${beginDate}-${endDate}.txt`
 
     let finishedPersons = this.state.persons
     let finishedPersonLine = finishedPersons.length
@@ -120,7 +123,7 @@ export default React.createClass ({
     return (
       <div className='main p-list'>
         <h5 className='operation-line'>
-          <a target='_blank' href={links.down}>Download</a>
+          <a target='_blank' href={links.down} download={downloadName}>Download</a>
           <a target='_blank' href={links.mail}>Email</a>
         </h5>
         {projectsContent}
