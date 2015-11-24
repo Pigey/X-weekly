@@ -8,21 +8,28 @@ import './index.less'
 import React from 'react'
 import { Task as TaskModel } from 'model'
 import HistoryList from 'widget/history/list'
+import Loading from 'widget/loading'
 
 export default React.createClass ({
 
   getInitialState: function () {
     return {
-      histories: []
+      histories: [],
+      loading: false
     };
   },
 
   refreshHistories: function () {
     let me = this
 
+    me.setState({
+      loading: true
+    })
+
     TaskModel.distinct('week').then(function(weeks){
       me.setState({
-        histories: weeks.sort((a, b) => (b - a)).map(week => ({ week }))
+        histories: weeks.sort((a, b) => (b - a)).map(week => ({ week })),
+        loading: false
       })
     });
   },
@@ -33,9 +40,13 @@ export default React.createClass ({
   },
 
   render: function () {
+    let mainContent = this.state.loading
+      ? <Loading />
+      : <HistoryList histories={this.state.histories} />
+
     return (
       <div className='main'>
-        <HistoryList histories={this.state.histories} />
+        {mainContent}
       </div>
     )
   }

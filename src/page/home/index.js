@@ -8,6 +8,7 @@ import './index.less'
 import React from 'react'
 import ProjectList from 'widget/project/list'
 import TaskInput from 'widget/task/input'
+import Loading from 'widget/loading'
 import weeker from 'mixin/weeker'
 import tag from 'mixin/tag'
 
@@ -28,7 +29,8 @@ export default React.createClass ({
       username: localStorage.username || '',
       projects: [],
       statuses: [],
-      tasks: []
+      tasks: [],
+      loading: false
     };
   },
 
@@ -36,6 +38,13 @@ export default React.createClass ({
     const tag = this.createTag(name)
 
     let me = this
+
+    if (name === 'tasks') {
+      me.setState({
+        loading: true
+      })
+    }
+
     model.list(params).then(function (list) {
       if (!me.validateTag(name, tag)) {
         return
@@ -44,6 +53,12 @@ export default React.createClass ({
       me.setState({
         [name]: list
       })
+
+      if (name === 'tasks') {
+        me.setState({
+          loading: false
+        })
+      }
     })
   },
 
@@ -94,10 +109,13 @@ export default React.createClass ({
   },
 
   render: function () {
+    let projectsContent = this.state.loading
+      ? <Loading />
+      : <ProjectList projects={tasksToProjects(this.state.tasks)} showPerson={false}></ProjectList>
     return (
       <div className='main'>
         <TaskInput person={this.state.username} projects={this.state.projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
-        <ProjectList projects={tasksToProjects(this.state.tasks)} showPerson={false}></ProjectList>
+        {projectsContent}
       </div>
     )
   }

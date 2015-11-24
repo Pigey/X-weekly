@@ -8,6 +8,7 @@ import './index.less'
 import React from 'react'
 import weeker from 'mixin/weeker'
 import ProjectList from 'widget/project/list'
+import Loading from 'widget/loading'
 import { Task as TaskModel } from 'model'
 import { formatDate, tasksToProjects, makeMailLink } from 'util'
 
@@ -19,7 +20,8 @@ export default React.createClass ({
     return {
       tasks: [],
       persons: [],
-      lastPersons: []
+      lastPersons: [],
+      loading: false
     };
   },
 
@@ -30,9 +32,14 @@ export default React.createClass ({
       week: this.getWeek()
     }, params)
 
+    me.setState({
+      loading: true
+    })
+
     TaskModel.list(params).then(function (list) {
       me.setState({
-        tasks: list
+        tasks: list,
+        loading: false
       })
     })
 
@@ -86,20 +93,29 @@ export default React.createClass ({
 
   render: function () {
     let projects = tasksToProjects(this.state.tasks)
+    let projectsContent = this.state.loading
+      ? <Loading />
+      : <ProjectList projects={projects} showRemove={false} />
+
     let links = this.getLinks(projects)
 
     let finishedPersons = this.state.persons
-    let unfinishedPersons = this.state.lastPersons.filter(
-      person => finishedPersons.indexOf(person) < 0
-    )
-
     let finishedPersonLine = finishedPersons.length
       ? <p>已提交：{finishedPersons.join(' , ')}</p>
       : <p>无人提交。</p>
 
+    let unfinishedPersons = this.state.lastPersons.filter(
+      person => finishedPersons.indexOf(person) < 0
+    )
     let unfinishedPersonLine = unfinishedPersons.length
       ? <p>未提交：{unfinishedPersons.join(', ')}</p>
       : ''
+    let personLine = this.state.loading
+      ? ''
+      : <div className='person-line'>
+          {finishedPersonLine}
+          {unfinishedPersonLine}
+        </div>
 
     return (
       <div className='main p-list'>
@@ -107,11 +123,8 @@ export default React.createClass ({
           <a target='_blank' href={links.down}>Download</a>
           <a target='_blank' href={links.mail}>Email</a>
         </h5>
-        <ProjectList projects={projects} showRemove={false} />
-        <div className='person-line'>
-          {finishedPersonLine}
-          {unfinishedPersonLine}
-        </div>
+        {projectsContent}
+        {personLine}
       </div>
     )
   }
