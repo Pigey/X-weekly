@@ -27,12 +27,16 @@ export default React.createClass ({
   render: function () {
     let { showPerson, showRemove } = this.props
     let className = `w-task-item${showPerson ? '' : ' no-person'}${showRemove ? '' : ' no-remove'}`
+
     let imgs = this.props.imgs.map(img => <img src={img} />)
     let imgLine = this.props.imgs.length
       ? <p className="task-img-line">
           {imgs}
         </p>
       : ''
+
+    // hide img line temparorily
+    imgLine = ''
 
     return (
       <li className={className}>
@@ -41,7 +45,7 @@ export default React.createClass ({
           <span className="task-status">{this.props.status}</span>
           <span className="task-person">, {this.props.person}</span>
         </p>
-        <span className="op-remove" onClick={this.handleRemove}>X</span>
+        <a href="javascript:;" className="op-remove" onClick={this.handleRemove}>X</a>
         {imgLine}
       </li>
     )
