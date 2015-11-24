@@ -25,7 +25,7 @@ export default React.createClass ({
 
   getInitialState: function () {
     return {
-      username: localStorage.username,
+      username: localStorage.username || '',
       projects: [],
       statuses: [],
       tasks: []
