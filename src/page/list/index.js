@@ -95,19 +95,26 @@ export default React.createClass ({
 
   render: function () {
     let projects = tasksToProjects(this.state.tasks)
-    let projectsContent = this.state.loading
-      ? <Loading />
-      : <ProjectList projects={projects} showRemove={false} />
 
     let links = this.getLinks(projects)
     let weekRange = this.getWeekRange()
     let [ beginDate, endDate ] = [ weekRange.begin, weekRange.end ].map(formatDate)
     let downloadName = `周报${beginDate}-${endDate}.txt`
+    let operationLine = projects.length
+      ? <h5 className='operation-line'>
+          <a target='_blank' href={links.down} download={downloadName}>Download</a>
+          <a target='_blank' href={links.mail}>Email</a>
+        </h5>
+      : ''
+
+    let projectsContent = this.state.loading
+      ? <Loading />
+      : <ProjectList projects={projects} showRemove={false} />
 
     let finishedPersons = this.state.persons
     let finishedPersonLine = finishedPersons.length
       ? <p>已提交：{finishedPersons.join(' , ')}</p>
-      : <p>无人提交。</p>
+      : ''
 
     let unfinishedPersons = this.state.lastPersons.filter(
       person => finishedPersons.indexOf(person) < 0
@@ -124,10 +131,7 @@ export default React.createClass ({
 
     return (
       <div className='main p-list'>
-        <h5 className='operation-line'>
-          <a target='_blank' href={links.down} download={downloadName}>Download</a>
-          <a target='_blank' href={links.mail}>Email</a>
-        </h5>
+        {operationLine}
         {projectsContent}
         {personLine}
       </div>
