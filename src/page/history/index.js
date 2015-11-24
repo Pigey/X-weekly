@@ -19,12 +19,14 @@ export default React.createClass ({
     };
   },
 
-  refreshHistories: function () {
+  refreshHistories: function (noLoading) {
     let me = this
 
-    me.setState({
-      loading: true
-    })
+    if (!noLoading) {
+      me.setState({
+        loading: true
+      })
+    }
 
     TaskModel.distinct('week').then(function(weeks){
       me.setState({
@@ -35,7 +37,7 @@ export default React.createClass ({
   },
 
   componentDidMount: function () {
-    TaskModel.on('change', this.refreshHistories)
+    TaskModel.on('change', this.refreshHistories.bind(this, true))
     this.refreshHistories()
   },
 

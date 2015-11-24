@@ -25,16 +25,18 @@ export default React.createClass ({
     };
   },
 
-  refreshTasks: function (params) {
+  refreshTasks: function (params, noLoading) {
     let me = this
 
     params = Object.assign({
       week: this.getWeek()
     }, params)
 
-    me.setState({
-      loading: true
-    })
+    if (!noLoading) {
+      me.setState({
+        loading: true
+      })
+    }
 
     TaskModel.list(params).then(function (list) {
       me.setState({
@@ -87,7 +89,7 @@ export default React.createClass ({
   },
 
   componentDidMount: function () {
-    TaskModel.on('change', this.refreshTasks.bind(this, null))
+    TaskModel.on('change', this.refreshTasks.bind(this, null, true))
     this.refreshTasks()
   },
 

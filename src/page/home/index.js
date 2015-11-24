@@ -39,13 +39,7 @@ export default React.createClass ({
 
     let me = this
 
-    if (name === 'tasks') {
-      me.setState({
-        loading: true
-      })
-    }
-
-    model.list(params).then(function (list) {
+    return model.list(params).then(function (list) {
       if (!me.validateTag(name, tag)) {
         return
       }
@@ -53,12 +47,6 @@ export default React.createClass ({
       me.setState({
         [name]: list
       })
-
-      if (name === 'tasks') {
-        me.setState({
-          loading: false
-        })
-      }
     })
   },
 
@@ -70,7 +58,15 @@ export default React.createClass ({
     this.refreshModel(StatusModel, 'statuses')
   },
 
-  refreshTasks: function (params) {
+  refreshTasks: function (params, noLoading) {
+    let me = this
+
+    if (!noLoading) {
+      me.setState({
+        loading: true
+      })
+    }
+
     this.refreshModel(
       TaskModel,
       'tasks',
@@ -78,7 +74,11 @@ export default React.createClass ({
         week: this.getWeek(),
         person: this.state.username
       }, params)
-    )
+    ).then(function () {
+      me.setState({
+        loading: false
+      })
+    })
   },
 
   handleWeekChange: function(week) {
@@ -90,7 +90,7 @@ export default React.createClass ({
   componentDidMount: function () {
     ProjectModel.on('change', this.refreshProjects)
     StatusModel.on('change', this.refreshStatuses)
-    TaskModel.on('change', this.refreshTasks.bind(this, null))
+    TaskModel.on('change', this.refreshTasks.bind(this, null, true))
 
     this.refreshProjects()
     this.refreshStatuses()
