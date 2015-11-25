@@ -114,7 +114,7 @@ export default React.createClass ({
       ? <Loading />
       : <ProjectList projects={tasksToProjects(this.state.tasks)} showPerson={false}></ProjectList>
     return (
-      <div className='main'>
+      <div className='main p-home'>
         <TaskInput person={this.state.username} projects={this.state.projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
         {projectsContent}
       </div>

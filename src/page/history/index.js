@@ -50,7 +50,7 @@ export default React.createClass ({
       : <HistoryList histories={this.state.histories} />
 
     return (
-      <div className='main'>
+      <div className='main p-history'>
         {mainContent}
       </div>
     )
