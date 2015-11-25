@@ -8,10 +8,14 @@ import './index.less'
 import React from 'react'
 import weeker from 'mixin/weeker'
 import delegator from 'mixin/delegator'
-import ProjectList from 'widget/project/list'
-import Loading from 'widget/loading'
+
 import { Task as TaskModel } from 'model'
-import { formatDate, tasksToProjects, makeMailLink } from 'util'
+import { tasksToProjects } from 'util'
+
+import OperationLine from 'widget/operation-line'
+import ProjectList from 'widget/project/list'
+import PersonLine from 'widget/person-line'
+import Loading from 'widget/loading'
 
 export default React.createClass ({
 
@@ -64,25 +68,6 @@ export default React.createClass ({
     })
   },
 
-  getLinks: function (projects) {
-    let plainContent = projects.map(project => {
-        let tasks = project.tasks.map(
-          (task, i) => `${i + 1}. ${task.cnt} （${task.status}） 【${task.person}】`
-        ).join('\r\n\t')
-        return `${project.name}：\r\n\r\n\t${tasks}`
-    }).join('\r\n\r\n')
-
-    let down = URL.createObjectURL(new Blob([plainContent]))
-    let mail = makeMailLink({
-      mailto: 'zuming@baidu.com',
-      cc: 'csfe@baidu.com',
-      subject: `糯米FE周报${formatDate(new Date())}`,
-      body: plainContent
-    })
-
-    return { down, mail }
-  },
-
   handleWeekChange: function(week) {
     this.refreshTasks({
       week: week
@@ -97,38 +82,17 @@ export default React.createClass ({
   render: function () {
     let projects = tasksToProjects(this.state.tasks)
 
-    let links = this.getLinks(projects)
-    let weekRange = this.getWeekRange()
-    let [ beginDate, endDate ] = [ weekRange.begin, weekRange.end ].map(formatDate)
-    let downloadName = `周报${beginDate}-${endDate}.txt`
     let operationLine = projects.length
-      ? <h5 className='operation-line'>
-          <a target='_blank' href={links.down} download={downloadName}>Download</a>
-          <a target='_blank' href={links.mail}>Email</a>
-        </h5>
+      ? <OperationLine projects={projects} week={this.getWeek()} />
       : ''
 
     let projectsContent = this.state.loading
       ? <Loading />
       : <ProjectList projects={projects} showRemove={false} />
 
-    let finishedPersons = this.state.persons
-    let finishedPersonLine = finishedPersons.length
-      ? <p>已提交：{finishedPersons.join(' , ')}</p>
-      : ''
-
-    let unfinishedPersons = this.state.lastPersons.filter(
-      person => finishedPersons.indexOf(person) < 0
-    )
-    let unfinishedPersonLine = unfinishedPersons.length
-      ? <p>未提交：{unfinishedPersons.join(', ')}</p>
-      : ''
     let personLine = this.state.loading
       ? ''
-      : <div className='person-line'>
-          {finishedPersonLine}
-          {unfinishedPersonLine}
-        </div>
+      : <PersonLine persons={this.state.persons} lastPersons={this.state.lastPersons} />
 
     return (
       <div className='main p-list'>
