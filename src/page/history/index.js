@@ -9,8 +9,11 @@ import React from 'react'
 import { Task as TaskModel } from 'model'
 import HistoryList from 'widget/history/list'
 import Loading from 'widget/loading'
+import delegator from 'mixin/delegator'
 
 export default React.createClass ({
+
+  mixins: [delegator],
 
   getInitialState: function () {
     return {
@@ -37,7 +40,7 @@ export default React.createClass ({
   },
 
   componentDidMount: function () {
-    TaskModel.on('change', this.refreshHistories.bind(this, true))
+    this.delegate(TaskModel, 'change', this.refreshHistories.bind(this, true))
     this.refreshHistories()
   },
 

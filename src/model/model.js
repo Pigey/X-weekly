@@ -4,6 +4,10 @@
  */
 
 import X from './x'
+import { EventEmitter } from 'events'
+
+const LISTENING = Symbol('listening')
+const EMITTERS = {}
 
 export default class Model {
 
@@ -18,10 +22,27 @@ export default class Model {
     })
   }
 
-  static on(...args) {
+  static on(event, handler) {
+    let listening = this[LISTENING] = this[LISTENING] || Object.create(null)
+    let emitter = EMITTERS[this.modelName] = EMITTERS[this.modelName] || new EventEmitter()
+
     this.model.then((model) => {
-      model.on.apply(model, args)
+      if (!listening[event]) {
+        listening[event] = true
+        model.on(event, function (...args) {
+          emitter.emit(event, ...args)
+        })
+      }
+
+      emitter.on(event, handler)
     })
+  }
+
+  static off(event, handler) {
+    let emitter = EMITTERS[this.modelName]
+    if (emitter) {
+      emitter.removeListener(event, handler)
+    }
   }
 
 }
@@ -48,19 +69,17 @@ let cachable = function (name, method) {
 
     if (!Model.cache) {
       Model.cache = {}
-      Model.model.then((model) => {
-        model.on('change', function () {
-          console.log('clean', Model.modelName)
-          Model.cache = {}
-        })
+      Model.on('change', function () {
+        console.log('clean', Model.modelName)
+        Model.cache = {}
       })
     }
 
-    const cache = Model.cache[name] = Model.cache[name] || {}
-    const key = JSON.stringify(args.map(arg => (arg === undefined ? null : arg)))
-
     // wait for cache-clean
     return Promise.resolve().then(function () {
+      const cache = Model.cache[name] = Model.cache[name] || {}
+      const key = JSON.stringify(args.map(arg => (arg === undefined ? null : arg)))
+
       if (cache.hasOwnProperty(key)) {
         console.log('hit', Model.modelName, name, key)
         return cache[key]

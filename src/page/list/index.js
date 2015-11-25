@@ -7,6 +7,7 @@ import './index.less'
 
 import React from 'react'
 import weeker from 'mixin/weeker'
+import delegator from 'mixin/delegator'
 import ProjectList from 'widget/project/list'
 import Loading from 'widget/loading'
 import { Task as TaskModel } from 'model'
@@ -14,7 +15,7 @@ import { formatDate, tasksToProjects, makeMailLink } from 'util'
 
 export default React.createClass ({
 
-  mixins: [weeker],
+  mixins: [weeker, delegator],
 
   getInitialState: function () {
     return {
@@ -89,7 +90,7 @@ export default React.createClass ({
   },
 
   componentDidMount: function () {
-    TaskModel.on('change', this.refreshTasks.bind(this, null, true))
+    this.delegate(TaskModel, 'change', this.refreshTasks.bind(this, null, true))
     this.refreshTasks()
   },
 

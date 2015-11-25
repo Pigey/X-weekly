@@ -9,6 +9,7 @@ import React from 'react'
 import ProjectList from 'widget/project/list'
 import TaskInput from 'widget/task/input'
 import Loading from 'widget/loading'
+import delegator from 'mixin/delegator'
 import weeker from 'mixin/weeker'
 import tag from 'mixin/tag'
 
@@ -22,7 +23,7 @@ import { tasksToProjects } from 'util'
 
 export default React.createClass ({
 
-  mixins: [weeker, tag],
+  mixins: [delegator, weeker, tag],
 
   getInitialState: function () {
     return {
@@ -88,9 +89,9 @@ export default React.createClass ({
   },
 
   componentDidMount: function () {
-    ProjectModel.on('change', this.refreshProjects)
-    StatusModel.on('change', this.refreshStatuses)
-    TaskModel.on('change', this.refreshTasks.bind(this, null, true))
+    this.delegate(ProjectModel, 'change', this.refreshProjects)
+    this.delegate(StatusModel, 'change', this.refreshStatuses)
+    this.delegate(TaskModel, 'change', this.refreshTasks.bind(this, null, true))
 
     this.refreshProjects()
     this.refreshStatuses()
