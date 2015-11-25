@@ -71,14 +71,7 @@ export default React.createClass ({
   render: function () {
     let me = this
 
-    let toOption = (item => (
-      <option key={item._id} onChange={me.handleChange} value={item.name}>
-        {item.name}
-      </option>
-    ))
-
     let invalid = me.state.invalid
-
     let getClass = (name => {
       return `${name}-in` + (
         invalid.indexOf(name) >= 0
@@ -87,21 +80,28 @@ export default React.createClass ({
       )
     })
 
-    let projectOptions = this.props.projects.map(toOption)
-    let statusOptions = this.props.statuses.map(toOption)
+    let [ projects, statuses ] = [ this.props.projects, this.props.statuses ].map(list => {
+      let loading = !list.length
+      return {
+        loading: loading ? ' loading' : '',
+        options: loading
+          ? <option>Loading ...</option>
+          : list.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
+      }
+    })
 
     return (
       <form className='w-task-input' onSubmit={this.handleSubmit}>
         <div className='line'>
           <input className={getClass('person')} ref='person' type='text' placeholder='姓名' defaultValue={this.props.person} onChange={this.handlePersonChange} />
-          <select className={getClass('project')} ref='project' onChange={this.handleChange}>
-            {projectOptions}
+          <select className={getClass('project') + projects.loading} ref='project' onChange={this.handleChange}>
+            {projects.options}
           </select>
         </div>
         <div className='line'>
           <input className={getClass('cnt')} ref='cnt' type='text' placeholder='内容' onChange={this.handleChange} />
-          <select className={getClass('status')} ref='status' onChange={this.handleChange}>
-            {statusOptions}
+          <select className={getClass('status') + statuses.loading} ref='status' onChange={this.handleChange}>
+            {statuses.options}
           </select>
         </div>
         <button type='submit' className='submit'>添加</button>
