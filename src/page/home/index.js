@@ -19,7 +19,7 @@ import {
   Task as TaskModel
 } from 'model'
 
-import { tasksToProjects } from 'util'
+import { PROJECT_SEQUENCE, sortBy, tasksToProjects } from 'util'
 
 export default React.createClass ({
 
@@ -110,12 +110,21 @@ export default React.createClass ({
   },
 
   render: function () {
+    let projects = sortBy(
+      this.state.projects,
+      PROJECT_SEQUENCE,
+      'name'
+    )
+
+    let projectsWithTask = tasksToProjects(this.state.tasks)
+
     let projectsContent = this.state.loading
       ? <Loading />
-      : <ProjectList projects={tasksToProjects(this.state.tasks)} showPerson={false}></ProjectList>
+      : <ProjectList projects={projectsWithTask} showPerson={false}></ProjectList>
+
     return (
       <div className='main p-home'>
-        <TaskInput person={this.state.username} projects={this.state.projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
+        <TaskInput person={this.state.username} projects={projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
         {projectsContent}
       </div>
     )

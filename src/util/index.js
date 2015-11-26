@@ -6,6 +6,17 @@
 // length of one day
 export const ONE_DAY = 24 * 60 * 60 * 1000
 
+// pre-set sequence for project
+export const PROJECT_SEQUENCE = [
+    '糯米-PC端',
+    '糯米-WAP端',
+    '糯米-组件化',
+    '组件化开发平台',
+    'API开放(鸿鹄)平台',
+    '小游戏',
+    '其他'
+]
+
 // get param in location.search
 export function getQuery (key, process) {
     if(!location.search) return null
@@ -47,6 +58,18 @@ export function formatDate (date) {
     return `${y}.${m}.${d}`
 }
 
+export function sortBy (list, sequence, field) {
+    // compare method for sort by pre-set sequence
+    let compare = function (a, b) {
+        [a, b] = [a, b]
+            .map(item => sequence.indexOf(field ? item[field] : item))
+            .map(item => (item >= 0 ? item : 99999))
+        return a - b
+    }
+
+    return list.sort(compare)
+}
+
 export function tasksToProjects (tasks) {
     let projectMap = tasks.reduce((projectMap, task) => {
         let name = task.project
@@ -59,28 +82,11 @@ export function tasksToProjects (tasks) {
         return projectMap
     }, {})
 
-    // pre-set sequence
-    let sequence = [
-        '糯米-PC端',
-        '糯米-WAP端',
-        '糯米-组件化',
-        '组件化开发平台',
-        'API开放(鸿鹄)平台',
-        '小游戏',
-        '其他'
-    ]
-
-    // compare method for sort by pre-set sequence
-    let compare = function (a, b) {
-        [a, b] = [a, b]
-            .map(item => sequence.indexOf(item.name))
-            .map(item => (item >= 0 ? item : 99999))
-        return a - b
-    }
-
-    return Object.keys(projectMap)
-        .map(name => projectMap[name])
-        .sort(compare)
+    return sortBy(
+        Object.keys(projectMap).map(name => projectMap[name]),
+        PROJECT_SEQUENCE,
+        'name'
+    )
 }
 
 export function makeMailLink ({ mailto, cc, subject, body }) {
