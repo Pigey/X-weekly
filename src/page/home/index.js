@@ -6,9 +6,12 @@
 import './index.less'
 
 import React from 'react'
+
 import ProjectList from 'widget/project/list'
 import TaskInput from 'widget/task/input'
 import Loading from 'widget/loading'
+import Footer from 'widget/footer'
+
 import delegator from 'mixin/delegator'
 import weeker from 'mixin/weeker'
 import tag from 'mixin/tag'
@@ -126,6 +129,7 @@ export default React.createClass ({
       <div className='main p-home'>
         <TaskInput person={this.state.username} projects={projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
         {projectsContent}
+        <Footer />
       </div>
     )
   }

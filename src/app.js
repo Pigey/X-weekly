@@ -8,11 +8,11 @@ import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute } from 'react-router'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import './widget/global'
 
 import Header from './widget/header'
-import Footer from './widget/footer'
 import Home from './page/home'
 import List from './page/list'
 import History from './page/history'
@@ -22,8 +22,15 @@ class App extends React.Component {
     return (
       <div>
         {this.props.header}
-        {this.props.main}
-        <Footer></Footer>
+        <ReactCSSTransitionGroup 
+          component="div" 
+          transitionName="slide" 
+          transitionEnterTimeout={500} 
+          transitionLeaveTimeout={500}>
+          {this.props.main && React.cloneElement(this.props.main, {
+            key: this.props.main.props.location.pathname
+          })}
+        </ReactCSSTransitionGroup>
       </div>
     )
   }

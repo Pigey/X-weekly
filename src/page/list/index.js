@@ -16,6 +16,7 @@ import OperationLine from 'widget/operation-line'
 import ProjectList from 'widget/project/list'
 import PersonLine from 'widget/person-line'
 import Loading from 'widget/loading'
+import Footer from 'widget/footer'
 
 export default React.createClass ({
 
@@ -96,9 +97,12 @@ export default React.createClass ({
 
     return (
       <div className='main p-list'>
-        {operationLine}
-        {projectsContent}
-        {personLine}
+        <div className='list-main'>
+          {operationLine}
+          {projectsContent}
+          {personLine}
+        </div>
+        <Footer />
       </div>
     )
   }
