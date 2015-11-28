@@ -7,6 +7,7 @@ import './index.less'
 
 import React from 'react'
 import { Task as TaskModel } from 'model'
+import Footer from 'widget/footer'
 import HistoryList from 'widget/history/list'
 import Loading from 'widget/loading'
 import delegator from 'mixin/delegator'
@@ -52,6 +53,7 @@ export default React.createClass ({
     return (
       <div className='main p-history'>
         {mainContent}
+        <Footer />
       </div>
     )
   }

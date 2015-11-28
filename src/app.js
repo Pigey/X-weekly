@@ -5,25 +5,34 @@
 
 import 'babel-polyfill'
 
-import React from 'react'
-import { render } from 'react-dom'
-import { Router, Route, IndexRoute } from 'react-router'
-
+import './app.less'
 import './widget/global'
 
-import Header from './widget/header'
-import Footer from './widget/footer'
-import Home from './page/home'
-import List from './page/list'
-import History from './page/history'
+import React from 'react'
+import { render } from 'react-dom'
+import { Router, Route, IndexRoute, Redirect } from 'react-router'
+
+import Header from 'widget/header'
+import Home from 'page/home'
+import List from 'page/list'
+import History from 'page/history'
+import RouteCSSTransitionGroup from 'widget/route-css-transition-group'
 
 class App extends React.Component {
   render() {
+    const order = [ '', 'home', 'list', 'history' ]
+
     return (
       <div>
         {this.props.header}
-        {this.props.main}
-        <Footer></Footer>
+        <RouteCSSTransitionGroup 
+          component="div" 
+          transitionName="slide" 
+          transitionEnterTimeout={400} 
+          transitionLeaveTimeout={400} 
+          order={order}>
+          {this.props.main}
+        </RouteCSSTransitionGroup>
       </div>
     )
   }
