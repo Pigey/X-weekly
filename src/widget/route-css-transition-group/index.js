@@ -23,7 +23,6 @@ export default React.createClass ({
     if (nextContext.location.pathname !== this.context.location.pathname) {
       this.setState({ previousPathname: this.context.location.pathname })
 
-      debugger
       if (nextProps.order) {
         let [ pos, nextPos ] = [ this.props, nextProps ]
           .map(props => (props.children.props.route.path || ''))
