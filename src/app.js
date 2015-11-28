@@ -5,32 +5,33 @@
 
 import 'babel-polyfill'
 
-import React from 'react'
-import { render } from 'react-dom'
-import { Router, Route, IndexRoute } from 'react-router'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-
 import './widget/global'
 
-import Header from './widget/header'
-import Home from './page/home'
-import List from './page/list'
-import History from './page/history'
+import React from 'react'
+import { render } from 'react-dom'
+import { Router, Route, IndexRoute, Redirect } from 'react-router'
+
+import Header from 'widget/header'
+import Home from 'page/home'
+import List from 'page/list'
+import History from 'page/history'
+import RouteCSSTransitionGroup from 'widget/route-css-transition-group'
 
 class App extends React.Component {
   render() {
+    const order = [ '', 'home', 'list', 'history' ]
+
     return (
       <div>
         {this.props.header}
-        <ReactCSSTransitionGroup 
+        <RouteCSSTransitionGroup 
           component="div" 
           transitionName="slide" 
-          transitionEnterTimeout={500} 
-          transitionLeaveTimeout={500}>
-          {this.props.main && React.cloneElement(this.props.main, {
-            key: this.props.main.props.location.pathname
-          })}
-        </ReactCSSTransitionGroup>
+          transitionEnterTimeout={300} 
+          transitionLeaveTimeout={300} 
+          order={order}>
+          {this.props.main}
+        </RouteCSSTransitionGroup>
       </div>
     )
   }

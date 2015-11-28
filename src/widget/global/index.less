@@ -132,26 +132,78 @@ table {
 }
 
 .main {
-    .center();
+    @width: 960px;
+
+    .center(@width);
+
     padding: 40px 0 0;
     min-height: 200px;
 
-    &.slide-enter {
-        transition: transform .5s ease-in;
-        transform: translateX(100%);
-        &.slide-enter-active {
-            transform: translateX(0);
-        }
+    .slide-enter(@offset, @time: .3s) {
+        opacity: 0;
+        transition: @time ease-in;
+        transform: translateX(@offset);
     }
 
-    &.slide-leave {
+    .slide-enter-active(@offset: 0) {
+        opacity: 1;
+        transform: translateX(@offset);
+    }
+
+    .slide-leave(@offset: 0, @time: .3s) {
         position: absolute;
         top: 0;
         left: 50%;
-        margin-left: -480px;
-        transition: transform .5s ease-in;
-        &.slide-leave-active {
-            transform: translateX(-100%);
+        margin-left: -(@width / 2);
+        opacity: 1;
+        transition: @time ease-in;
+        transform: translateX(@offset);
+    }
+
+    .slide-leave-active(@offset) {
+        opacity: 0;
+        transform: translateX(@offset);
+    }
+
+    &.ascending-order-slide-enter {
+        .slide-enter(100%);
+        &.ascending-order-slide-enter-active {
+            .slide-enter-active();
+        }
+    }
+
+    &.ascending-order-slide-leave {
+        .slide-leave();
+        &.ascending-order-slide-leave-active {
+            .slide-leave-active(-100%);
+        }
+    }
+
+    &.descending-order-slide-enter {
+        .slide-enter(-100%);
+        &.descending-order-slide-enter-active {
+            .slide-enter-active();
+        }
+    }
+
+    &.descending-order-slide-leave {
+        .slide-leave();
+        &.descending-order-slide-leave-active {
+            .slide-leave-active(100%);
+        }
+    }
+
+    &.flat-order-slide-enter {
+        .slide-enter(0);
+        &.flat-order-slide-enter-active {
+            .slide-enter-active();
+        }
+    }
+
+    &.flat-order-slide-leave {
+        .slide-leave(0, .1s);
+        &.flat-order-slide-leave-active {
+            .slide-leave-active(0);
         }
     }
 }
