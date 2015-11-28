@@ -5,6 +5,7 @@
 
 import 'babel-polyfill'
 
+import './app.less'
 import './widget/global'
 
 import React from 'react'
@@ -27,8 +28,8 @@ class App extends React.Component {
         <RouteCSSTransitionGroup 
           component="div" 
           transitionName="slide" 
-          transitionEnterTimeout={300} 
-          transitionLeaveTimeout={300} 
+          transitionEnterTimeout={400} 
+          transitionLeaveTimeout={400} 
           order={order}>
           {this.props.main}
         </RouteCSSTransitionGroup>
