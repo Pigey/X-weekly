@@ -34,7 +34,7 @@ export default React.createClass ({
 
     return (
       <li className="w-history-item">
-        <Link to={`list/${week}`}>
+        <Link to={`/list/${week}`}>
           {formatDate(begin, 'begin')}
           <span className='sep'>-</span>
           {formatDate(end, 'end')}
