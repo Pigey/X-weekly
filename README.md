@@ -8,3 +8,8 @@ X-weekly
 ### 部署服务
 
 静态serve代码目录，在浏览器中打开`index.html`文件即可
+
+
+### TODO
+
+* use context instead of props for remove & person control of task-item
