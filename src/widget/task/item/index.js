@@ -10,11 +10,13 @@ import { Task as TaskModel } from 'model'
 
 export default React.createClass ({
 
+  contextTypes: {
+    isOwner: React.PropTypes.bool
+  },
+
   getDefaultProps: function () {
     return {
-      imgs: [],
-      showPerson: true,
-      showRemove: true
+      imgs: []
     }
   },
 
@@ -25,7 +27,8 @@ export default React.createClass ({
   },
 
   render: function () {
-    let { showPerson, showRemove } = this.props
+    let showPerson = !this.context.isOwner
+    let showRemove = this.context.isOwner
     let className = `w-task-item${showPerson ? '' : ' no-person'}${showRemove ? '' : ' no-remove'}`
 
     let imgs = this.props.imgs.map(img => <img src={img} />)

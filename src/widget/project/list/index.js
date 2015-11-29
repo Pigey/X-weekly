@@ -12,9 +12,7 @@ export default React.createClass ({
 
   getDefaultProps: function () {
     return {
-      projects: [],
-      showPerson: true,
-      showRemove: true
+      projects: []
     }
   },
 
@@ -27,9 +25,7 @@ export default React.createClass ({
           <ProjectItem 
             key={project.name} 
             name={project.name} 
-            tasks={project.tasks} 
-            showPerson={this.props.showPerson} 
-            showRemove={this.props.showRemove} />
+            tasks={project.tasks} />
         )
       })
       : <p className="no-record">无记录</p>

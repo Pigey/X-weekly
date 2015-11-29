@@ -112,6 +112,16 @@ export default React.createClass ({
     }))
   },
 
+  childContextTypes: {
+    isOwner: React.PropTypes.bool
+  },
+
+  getChildContext: function() {
+    return {
+      isOwner: true
+    }
+  },
+
   render: function () {
     let projects = sortBy(
       this.state.projects,
@@ -122,8 +132,8 @@ export default React.createClass ({
     let projectsWithTask = tasksToProjects(this.state.tasks)
 
     let projectsContent = this.state.loading
-      ? <Loading />
-      : <ProjectList projects={projectsWithTask} showPerson={false}></ProjectList>
+      ? <div className='loading-wrapper'><Loading /></div>
+      : <ProjectList projects={projectsWithTask}></ProjectList>
 
     return (
       <div className='main p-home'>

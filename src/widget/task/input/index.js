@@ -7,6 +7,7 @@ import './index.less'
 
 import React from 'react'
 import { throttle } from 'util'
+import Loading from 'widget/loading'
 
 export default React.createClass ({
 
@@ -42,10 +43,8 @@ export default React.createClass ({
       return
     }
 
-    let me = this
-    this.props.onSubmit(this.value()).then(() => {
-      me.refs.cnt.value = ''
-    })
+    this.props.onSubmit(this.value())
+    this.refs.cnt.value = ''
   },
 
   value: function () {
@@ -104,7 +103,7 @@ export default React.createClass ({
             {statuses.options}
           </select>
         </div>
-        <button type='submit' className='submit'>添加</button>
+        <button type='submit' className='submit'><Loading /></button>
       </form>
     )
   }

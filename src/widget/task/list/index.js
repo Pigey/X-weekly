@@ -11,9 +11,7 @@ import TaskItem from '../item'
 export default React.createClass ({
   getDefaultProps: function () {
     return {
-      tasks: [],
-      showPerson: true,
-      showRemove: true
+      tasks: []
     }
   },
 
@@ -23,8 +21,6 @@ export default React.createClass ({
         <TaskItem 
           key={task._id} 
           index={index} 
-          showPerson={this.props.showPerson} 
-          showRemove={this.props.showRemove} 
           {...task} />
       )
     })
