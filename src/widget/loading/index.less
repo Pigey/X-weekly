@@ -43,6 +43,14 @@
 			-moz-transform: scale(1);
 	}
 
+	&.theme-dark .cssload-thecube .cssload-cube:before {
+		background-color: rgba(80,80,80,1);
+	}
+
+	&.theme-light .cssload-thecube .cssload-cube:before {
+		background-color: rgba(175,175,175,1);
+	}
+
 	.cssload-thecube .cssload-cube:before {
 		content: "";
 		position: absolute;
@@ -50,7 +58,6 @@
 		left: 0;
 		width: 80%;
 		height: 80%;
-		background-color: rgba(80,80,80,1);
 		animation: cssload-fold-thecube 1.8s infinite linear both;
 			-o-animation: cssload-fold-thecube 1.8s infinite linear both;
 			-ms-animation: cssload-fold-thecube 1.8s infinite linear both;

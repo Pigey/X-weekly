@@ -8,9 +8,16 @@ import './index.less'
 import React from 'react'
 
 export default React.createClass ({
+
+  getDefaultProps: function () {
+    return {
+      theme: 'dark'
+    }
+  },
+
   render: function () {
     return (
-      <div className='w-loading'>
+      <div className={`w-loading theme-${this.props.theme}`}>
         <div className="cssload-thecube">
           <div className="cssload-cube cssload-c1"></div>
           <div className="cssload-cube cssload-c2"></div>
