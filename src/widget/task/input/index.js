@@ -13,7 +13,8 @@ export default React.createClass ({
 
   getInitialState: function () {
     return {
-      invalid: []
+      invalid: [],
+      submiting: false
     }
   },
 
@@ -43,8 +44,18 @@ export default React.createClass ({
       return
     }
 
-    this.props.onSubmit(this.value())
-    this.refs.cnt.value = ''
+    this.setState({
+      submiting: true
+    })
+
+    let onSubmit = () => {
+      this.refs.cnt.value = ''
+      this.setState({
+        submiting: false
+      })
+    }
+
+    this.props.onSubmit(this.value()).then(onSubmit, onSubmit)
   },
 
   value: function () {
@@ -89,8 +100,18 @@ export default React.createClass ({
       }
     })
 
+    let submiting = this.state.submiting
+
+    let handleSubmit = submiting
+      ? null
+      : this.handleSubmit
+
+    let button = submiting
+      ? <button className='submit' disabled><Loading theme='light' /></button>
+      : <button type='submit' className='submit'>添加</button>
+
     return (
-      <form className='w-task-input' onSubmit={this.handleSubmit}>
+      <form className='w-task-input' onSubmit={handleSubmit}>
         <div className='line'>
           <input className={getClass('person')} ref='person' type='text' placeholder='姓名' defaultValue={this.props.person} onChange={this.handlePersonChange} />
           <select className={getClass('project') + projects.loading} ref='project' onChange={this.handleChange}>
@@ -103,7 +124,7 @@ export default React.createClass ({
             {statuses.options}
           </select>
         </div>
-        <button type='submit' className='submit'><Loading /></button>
+        {button}
       </form>
     )
   }
