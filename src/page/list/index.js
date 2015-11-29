@@ -88,8 +88,8 @@ export default React.createClass ({
       : ''
 
     let projectsContent = this.state.loading
-      ? <Loading />
-      : <ProjectList projects={projects} showRemove={false} />
+      ? <div className='loading-wrapper'><Loading /></div>
+      : <ProjectList projects={projects} />
 
     let personLine = this.state.loading
       ? ''

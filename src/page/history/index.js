@@ -47,7 +47,7 @@ export default React.createClass ({
 
   render: function () {
     let mainContent = this.state.loading
-      ? <Loading />
+      ? <div className='loading-wrapper'><Loading /></div>
       : <HistoryList histories={this.state.histories} />
 
     return (
