@@ -9,6 +9,7 @@ import React from 'react'
 
 import ProjectList from 'widget/project/list'
 import TaskInput from 'widget/task/input'
+import StatusInput from 'widget/status/input'
 import Loading from 'widget/loading'
 import Footer from 'widget/footer'
 
@@ -112,6 +113,10 @@ export default React.createClass ({
     }))
   },
 
+  handleStatusSet: function (status) {
+    alert('set status: ' + status)
+  },
+
   childContextTypes: {
     isOwner: React.PropTypes.bool
   },
@@ -138,6 +143,7 @@ export default React.createClass ({
     return (
       <div className='main p-home'>
         <TaskInput person={this.state.username} projects={projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
+        <StatusInput onSubmit={this.handleStatusSet} />
         {projectsContent}
         <Footer />
       </div>
