@@ -20,19 +20,23 @@ import RouteCSSTransitionGroup from 'widget/route-css-transition-group'
 
 class App extends React.Component {
   render() {
-    const order = [ '', 'home', 'list', 'history' ]
+    const useAnimation = false
 
-    return (
-      <div>
-        {this.props.header}
-        <RouteCSSTransitionGroup 
+    const main = useAnimation
+      ? <RouteCSSTransitionGroup 
           component="div" 
           transitionName="slide" 
           transitionEnterTimeout={400} 
           transitionLeaveTimeout={400} 
-          order={order}>
+          order={[ '', 'home', 'list', 'history' ]}>
           {this.props.main}
         </RouteCSSTransitionGroup>
+      : this.props.main
+
+    return (
+      <div>
+        {this.props.header}
+        {main}
       </div>
     )
   }
