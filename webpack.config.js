@@ -25,11 +25,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015'],
-          plugins: ['transform-object-rest-spread']
-        }
+        loader: 'babel'
       },
       {
         test: /\.less$/,
@@ -38,6 +34,10 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json'
+      },
+      {
+        test: /\.svg$/,
+        loader: 'babel!svg-react'
       }
     ]
   },
