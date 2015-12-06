@@ -7,6 +7,8 @@ import './index.less'
 
 import React from 'react'
 import { Task as TaskModel } from 'model'
+import IconUser from './img/user.svg'
+import IconCalendar from './img/calendar.svg'
 
 export default React.createClass ({
 
@@ -45,8 +47,8 @@ export default React.createClass ({
       <li className={className}>
         <p className="task-cnt">{this.props.cnt}</p>
         <p className="task-info">
-          <span className="task-status">{this.props.status}</span>
-          <span className="task-person">, {this.props.person}</span>
+          <span className="task-status"><IconCalendar className="icon" /> {this.props.status}</span>
+          <span className="task-person"><IconUser className="icon" /> {this.props.person}</span>
         </p>
         <a href="javascript:;" className="op-remove" onClick={this.handleRemove}>X</a>
         {imgLine}
