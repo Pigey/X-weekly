@@ -9,7 +9,7 @@ import React from 'react'
 
 import ProjectList from 'widget/project/list'
 import TaskInput from 'widget/task/input'
-import StatusInput from 'widget/status/input'
+import OccupiedInput from 'widget/occupied/input'
 import Loading from 'widget/loading'
 import Footer from 'widget/footer'
 
@@ -20,7 +20,8 @@ import tag from 'mixin/tag'
 import {
   Project as ProjectModel,
   Status as StatusModel,
-  Task as TaskModel
+  Task as TaskModel,
+  Occupied as OccupiedModel
 } from 'model'
 
 import { PROJECT_SEQUENCE, sortBy, tasksToProjects } from 'util'
@@ -35,8 +36,19 @@ export default React.createClass ({
       projects: [],
       statuses: [],
       tasks: [],
+      occupied: null,
       loading: false
     };
+  },
+
+  childContextTypes: {
+    isOwner: React.PropTypes.bool
+  },
+
+  getChildContext: function() {
+    return {
+      isOwner: true
+    }
   },
 
   refreshModel: function (model, name, params) {
@@ -63,6 +75,28 @@ export default React.createClass ({
     this.refreshModel(StatusModel, 'statuses')
   },
 
+  refreshOccupied: function (params) {
+    const name = 'occupied'
+    const tag = this.createTag(name)
+
+    let me = this
+
+    return OccupiedModel.get(
+      Object.assign({
+        week: this.getWeek(),
+        person: this.state.username
+      }, params)
+    ).then(function (occupied) {
+      if (!me.validateTag(name, tag)) {
+        return
+      }
+
+      me.setState({
+        [name]: occupied
+      })
+    })
+  },
+
   refreshTasks: function (params, noLoading) {
     let me = this
 
@@ -87,23 +121,30 @@ export default React.createClass ({
   },
 
   handleWeekChange: function(week) {
-    this.refreshTasks({
-      week: week
-    })
+    let params = { week: week }
+    this.refreshTasks(params)
+    this.refreshOccupied(params)
   },
 
   componentDidMount: function () {
     this.delegate(ProjectModel, 'change', this.refreshProjects)
     this.delegate(StatusModel, 'change', this.refreshStatuses)
+    this.delegate(OccupiedModel, 'change', this.refreshOccupied.bind(this, null))
     this.delegate(TaskModel, 'change', this.refreshTasks.bind(this, null, true))
 
     this.refreshProjects()
     this.refreshStatuses()
+    this.refreshOccupied()
     this.refreshTasks()
   },
 
   handleUsernameChange: function (username) {
-    this.setState({ username }, this.refreshTasks.bind(this, null))
+    let me = this
+    this.setState({ username }, () => {
+      me.refreshTasks()
+      me.refreshOccupied()
+    })
+
     localStorage.username = username
   },
 
@@ -113,18 +154,23 @@ export default React.createClass ({
     }))
   },
 
-  handleStatusSet: function (status) {
-    alert('set status: ' + status)
-  },
-
-  childContextTypes: {
-    isOwner: React.PropTypes.bool
-  },
-
-  getChildContext: function() {
-    return {
-      isOwner: true
+  handleOccupiedLevelSet: function (level) {
+    if (this.state.occupied) {
+      return OccupiedModel.update(
+        { _id: this.state.occupied._id },
+        { level: level }
+      )
     }
+
+    return OccupiedModel.create({
+      person: this.state.username,
+      week: this.getWeek(),
+      level: level
+    })
+  },
+
+  estimateOccupiedLevel: function () {
+    return Math.min(this.state.tasks.length, 5) + ''
   },
 
   render: function () {
@@ -140,10 +186,13 @@ export default React.createClass ({
       ? <div className='loading-wrapper'><Loading /></div>
       : <ProjectList projects={projectsWithTask}></ProjectList>
 
+    let savedOccupiedLevel = this.state.occupied && this.state.occupied.level
+    let occupiedLevel = savedOccupiedLevel || this.estimateOccupiedLevel()
+
     return (
       <div className='main p-home'>
         <TaskInput person={this.state.username} projects={projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
-        <StatusInput onSubmit={this.handleStatusSet} />
+        <OccupiedInput value={occupiedLevel} saved={savedOccupiedLevel} onSubmit={this.handleOccupiedLevelSet} />
         {projectsContent}
         <Footer />
       </div>

@@ -22,6 +22,7 @@ export default React.createClass ({
   getDefaultProps: function () {
     return {
       value: null,
+      saved: null,
       onSubmit: function () {}
     }
   },
@@ -79,7 +80,7 @@ export default React.createClass ({
       : <button type='submit' className='submit'><IconOk className="icon" /></button>
 
     let value = this.state.manuallyChanged ? this.state.value : this.props.value
-    let dirty = value !== this.props.value
+    let dirty = value !== this.props.saved
 
     return (
       <form className='w-occupied-input' onSubmit={handleSubmit}>
