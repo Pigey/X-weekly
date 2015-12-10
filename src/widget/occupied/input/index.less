@@ -1,47 +1,64 @@
 /*
- * @file style for status input
+ * @file style for occupied input
  * @author nighca <nighca@live.cn>
  */
 
 @import "~util/index.less";
 
-.w-status-input {
+.w-occupied-input {
     .center(700px);
     margin-bottom: 20px;
-    line-height: 40px;
+    height: 40px;
 
     font-size: 14px;
 
-    .input {
+    &>* {
+        float: left;
+    }
+
+    span {
+        line-height: 40px;
+    }
+
+    .transparent-form() {
+        box-shadow: none;
         color: @baseColor;
         background-color: transparent;
     }
 
-    .input {
-        margin-left: 1em;
-        &:focus, &:hover, &:active {
-            box-shadow: none;
+    .input, .submit {
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
+        .transparent-form();
+        &:focus, &:hover, &:active, &.active {
+            .transparent-form();
         }
+    }
+
+    .input {
+        padding: 0 1em;
     }
 
     .submit {
         margin-left: 1em;
-        width: 30px;
-        height: 30px;
-
-        border-radius: 20px;
-
-        /*&:focus, &:hover {
-            color: #000;
-            box-shadow: none;
-        }
+        width: 40px;
+        padding: 12px;
 
         &:active, &.active {
-            color: #000;
-            background-color: transparent;
-            box-shadow: none;
             transform: scale(.7);
             transition: .1s ease-in;
-        }*/
+        }
+
+        .loading {
+            transform: scale(.8);
+        }
+
+        .icon {
+            display: block;
+            width: 16px;
+            height: 16px;
+            fill: #333;
+        }
     }
 }

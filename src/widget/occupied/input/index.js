@@ -1,18 +1,21 @@
 /*
- * @file task input
+ * @file occupied input
  * @author nighca <nighca@live.cn>
  */
 
 import './index.less'
 
 import React from 'react'
+import Loading from 'widget/loading'
+import IconOk from './img/ok.svg'
 
 export default React.createClass ({
 
   getInitialState: function () {
     return {
       value: null,
-      submiting: false
+      submiting: false,
+      manuallyChanged: false
     }
   },
 
@@ -23,10 +26,11 @@ export default React.createClass ({
     }
   },
 
-  handleChange: function () {
-    this.setState({
-      value: this.refs.input.value
-    })
+  handleChange: function (manually) {
+    this.setState({ value: this.refs.input.value })
+    if (manually) {
+      this.setState({ manuallyChanged: true })
+    }
   },
 
   handleSubmit: function (e) {
@@ -45,6 +49,10 @@ export default React.createClass ({
     this.props.onSubmit(this.state.value).then(onSubmit, onSubmit)
   },
 
+  componentDidMount: function () {
+    this.handleChange()
+  },
+
   render: function () {
 
     let options = [
@@ -54,7 +62,10 @@ export default React.createClass ({
       '有点忙',
       '忙成狗了'
     ].map(
-      (item, index) => <option key={item} value={index + 1}>{item}</option>
+      (desc, index) => {
+        let value = index + 1
+        return <option key={value} value={value}>{desc}</option>
+      }
     )
 
     let submiting = this.state.submiting
@@ -64,15 +75,16 @@ export default React.createClass ({
       : this.handleSubmit
 
     let button = submiting
-      ? <button className='submit' disabled><Loading /></button>
-      : <button type='submit' className='submit'>√</button>
+      ? <button className='submit' disabled><Loading className="loading" /></button>
+      : <button type='submit' className='submit'><IconOk className="icon" /></button>
 
-    let dirty = this.state.value !== this.props.value
+    let value = this.state.manuallyChanged ? this.state.value : this.props.value
+    let dirty = value !== this.props.value
 
     return (
-      <form className='w-status-input' onSubmit={handleSubmit}>
-        我觉得这周
-        <select ref='input' className='input' onChange={this.handleChange}>
+      <form className='w-occupied-input' onSubmit={handleSubmit}>
+        我这周的忙碌程度为
+        <select ref='input' className='input' value={value} onChange={this.handleChange}>
           {options}
         </select>
         {dirty ? button : ''}
