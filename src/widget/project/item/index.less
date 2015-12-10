@@ -9,15 +9,28 @@
     font-size: 14px;
 
     .project-name{
+        @color: #666;
+
         position: absolute;
         right: 0;
         top: 1.5em;
         width: 10em;
 
-        color: #666;
+        color: @color;
         font-size: 100%;
         font-weight: normal;
         letter-spacing: 1px;
         text-align: right;
+
+        * {
+            vertical-align: middle;
+        }
+
+        .icon {
+            margin-left: .5em;
+            width: .8em * (1280 / 1024);
+            height: .8em;
+            fill: lighten(@color, 20%);
+        }
     }
 }
