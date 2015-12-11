@@ -9,11 +9,12 @@ import React from 'react'
 import weeker from 'mixin/weeker'
 import delegator from 'mixin/delegator'
 
-import { Task as TaskModel } from 'model'
-import { tasksToProjects } from 'util'
+import { Task as TaskModel, Occupied as OccupiedModel } from 'model'
+import { OCCUPIED_LEVEL_LIST, tasksToProjects } from 'util'
 
 import OperationLine from 'widget/operation-line'
 import ProjectList from 'widget/project/list'
+import OccupiedList from 'widget/occupied/list'
 import PersonLine from 'widget/person-line'
 import Loading from 'widget/loading'
 import Footer from 'widget/footer'
@@ -26,9 +27,24 @@ export default React.createClass ({
     return {
       tasks: [],
       persons: [],
+      occupiedList: [],
       lastPersons: [],
       loading: false
     };
+  },
+
+  refreshOccupiedList: function (params) {
+    let me = this
+
+    params = Object.assign({
+      week: this.getWeek()
+    }, params)
+
+    OccupiedModel.list(params).then(function (occupiedList) {
+      me.setState({
+        occupiedList: occupiedList
+      })
+    })
   },
 
   refreshTasks: function (params, noLoading) {
@@ -70,14 +86,18 @@ export default React.createClass ({
   },
 
   handleWeekChange: function(week) {
-    this.refreshTasks({
-      week: week
-    })
+    let params = { week: week }
+
+    this.refreshTasks(params)
+    this.refreshOccupiedList(params)
   },
 
   componentDidMount: function () {
     this.delegate(TaskModel, 'change', this.refreshTasks.bind(this, null, true))
+    this.delegate(OccupiedModel, 'change', this.refreshOccupiedList.bind(this, null))
+
     this.refreshTasks()
+    this.refreshOccupiedList()
   },
 
   render: function () {
@@ -91,6 +111,23 @@ export default React.createClass ({
       ? <div className='loading-wrapper'><Loading /></div>
       : <ProjectList projects={projects} />
 
+    let occupiedList = OCCUPIED_LEVEL_LIST.map((item) => {
+      return {
+        level: item,
+        persons: this.state.occupiedList.filter(
+          occupied => (occupied.level === item.value)
+        ).map(
+          occupied => occupied.person
+        )
+      }
+    })
+
+    let occupiedContent = this.state.occupiedList.length
+      ? <div className="occupied-content">
+          <OccupiedList list={occupiedList} />
+        </div>
+      : ''
+
     let personLine = this.state.loading
       ? ''
       : <PersonLine persons={this.state.persons} lastPersons={this.state.lastPersons} />
@@ -100,6 +137,7 @@ export default React.createClass ({
         <div className='list-main'>
           {operationLine}
           {projectsContent}
+          {occupiedContent}
           {personLine}
         </div>
         <Footer />
