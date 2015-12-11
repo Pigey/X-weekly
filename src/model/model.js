@@ -49,12 +49,18 @@ export default class Model {
 
 ['list', 'get', 'distinct', 'create', 'remove', 'update'].forEach(name => {
   Model[name] = function (...args) {
+    const Model = this
+
     return this.model.then((model) => {
       return new Promise((resolve, reject) => {
         args.push((err, result) => {
-          err ?
-            reject(err) :
-            resolve(result)
+          if (err) {
+            console.warn('[MODEL]', 'fetch fail:', Model.modelName, args, err)
+            reject(err)
+            return
+          }
+          console.info('[MODEL]', 'fetch:', Model.modelName, args, result)
+          resolve(result)
         })
 
         model[name].apply(model, args)
