@@ -1,0 +1,44 @@
+/*
+ * @file style for occupied item
+ * @author nighca <nighca@live.cn>
+ */
+
+@import "~util/index.less";
+
+.w-occupied-list {
+    width: 700px;
+    margin: 0 auto;
+
+    .no-record {
+        line-height: 72px;
+        font-size: 12px;
+        color: #999;
+    }
+
+    .occupied-line {
+        color: #999;
+        font-size: 14px;
+
+        &:not(:last-child) {
+            margin-bottom: .5em;
+
+            &:after {
+                content: '，'
+            }
+        }
+
+        &:last-child {
+            &:after {
+                content: '。'
+            }
+        }
+
+        .occupied-person {
+            color: @baseColor;
+        }
+
+        .occupied-level {
+            margin-left: .5em;
+        }
+    }
+}
