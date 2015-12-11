@@ -1,0 +1,63 @@
+/*
+ * @file style for occupied input
+ * @author nighca <nighca@live.cn>
+ */
+
+@import "~util/index.less";
+
+.w-occupied-input {
+    .center(700px);
+    height: 40px;
+
+    font-size: 14px;
+
+    &>* {
+        float: left;
+    }
+
+    span {
+        line-height: 40px;
+    }
+
+    .transparent-form() {
+        box-shadow: none;
+        color: @baseColor;
+        background-color: transparent;
+    }
+
+    .input, .submit {
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
+        .transparent-form();
+        &:focus, &:hover, &:active, &.active {
+            .transparent-form();
+        }
+    }
+
+    .input {
+        padding: 0 1em;
+    }
+
+    .submit {
+        margin-left: 1em;
+        width: 40px;
+        padding: 12px;
+
+        &:active, &.active {
+            transform: scale(.7);
+            transition: .1s ease-in;
+        }
+
+        .loading {
+            transform: scale(.8);
+        }
+
+        .icon {
+            display: block;
+            width: 16px;
+            height: 16px;
+            fill: #333;
+        }
+    }
+}

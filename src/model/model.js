@@ -49,12 +49,18 @@ export default class Model {
 
 ['list', 'get', 'distinct', 'create', 'remove', 'update'].forEach(name => {
   Model[name] = function (...args) {
+    const Model = this
+
     return this.model.then((model) => {
       return new Promise((resolve, reject) => {
         args.push((err, result) => {
-          err ?
-            reject(err) :
-            resolve(result)
+          if (err) {
+            console.warn('[MODEL]', 'fetch fail:', Model.modelName, args, err)
+            reject(err)
+            return
+          }
+          console.info('[MODEL]', 'fetch:', Model.modelName, args, result)
+          resolve(result)
         })
 
         model[name].apply(model, args)
@@ -70,7 +76,7 @@ let cachable = function (name, method) {
     if (!Model.cache) {
       Model.cache = {}
       Model.on('change', function () {
-        console.log('clean', Model.modelName)
+        console.info('[MODEL]', 'cache-clean:', Model.modelName)
         Model.cache = {}
       })
     }
@@ -81,11 +87,11 @@ let cachable = function (name, method) {
       const key = JSON.stringify(args.map(arg => (arg === undefined ? null : arg)))
 
       if (cache.hasOwnProperty(key)) {
-        console.log('hit', Model.modelName, name, key)
+        console.info('[MODEL]', 'cache-hit:', Model.modelName, name, key)
         return cache[key]
       }
 
-      console.log('mis', Model.modelName, name, key)
+      console.info('[MODEL]', 'cache-mis:', Model.modelName, name, key)
       return cache[key] = method.apply(Model, args)
     })
   }
