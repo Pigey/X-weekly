@@ -8,6 +8,7 @@ import './index.less'
 import React from 'react'
 import Loading from 'widget/loading'
 import IconOk from './img/ok.svg'
+import { OCCUPIED_LEVEL_LIST } from 'util'
 
 export default React.createClass ({
 
@@ -28,7 +29,9 @@ export default React.createClass ({
   },
 
   handleChange: function (manually) {
-    this.setState({ value: this.refs.input.value })
+    if (this.state.value !== this.refs.input.value) {
+      this.setState({ value: this.refs.input.value })
+    }
     if (manually) {
       this.setState({ manuallyChanged: true })
     }
@@ -50,23 +53,14 @@ export default React.createClass ({
     this.props.onSubmit(this.state.value).then(onSubmit, onSubmit)
   },
 
-  componentDidMount: function () {
+  componentDidUpdate: function () {
     this.handleChange()
   },
 
   render: function () {
 
-    let options = [
-      '无所事事',
-      '略清闲',
-      '挺充实',
-      '有点忙',
-      '忙成狗了'
-    ].map(
-      (desc, index) => {
-        let value = index + 1
-        return <option key={value} value={value}>{desc}</option>
-      }
+    let options = OCCUPIED_LEVEL_LIST.map(
+      (item) => <option key={item.value} value={item.value}>{item.desc}</option>
     )
 
     let submiting = this.state.submiting
@@ -77,7 +71,7 @@ export default React.createClass ({
 
     let button = submiting
       ? <button className='submit' disabled><Loading className="loading" /></button>
-      : <button type='submit' className='submit'><IconOk className="icon" /></button>
+      : <button type='submit' className='submit' title='点击保存'><IconOk className="icon" /></button>
 
     let value = this.state.manuallyChanged ? this.state.value : this.props.value
     let dirty = value !== this.props.saved
