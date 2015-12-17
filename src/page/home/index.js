@@ -155,6 +155,10 @@ export default React.createClass ({
   },
 
   handleOccupiedLevelSet: function (level) {
+    if (!this.state.username) {
+      return
+    }
+
     if (this.state.occupied) {
       return OccupiedModel.update(
         { _id: this.state.occupied._id },
