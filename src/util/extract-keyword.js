@@ -39,7 +39,7 @@ function getShowTimesInAll (word, sentenceList, cache) {
 }
 
 function rate (word) {
-  return word.units.length * word.text.length * word.showTimes
+  return word.text.length * word.showTimes
 }
 
 function getWords (units, sentenceList, cache) {
@@ -67,7 +67,7 @@ function getWords (units, sentenceList, cache) {
   words = words.filter(
     word => (
       word.showTimes >= 2
-      && word.text.length >= 3
+      && word.text.length >= 2
     )
   )
 
@@ -78,7 +78,10 @@ function getWords (units, sentenceList, cache) {
   words = words.filter(
     (word, i) => {
       for (let len = words.length - 1; len > i; len--) {
-        if (words[len].text.indexOf(word.text) >= 0) {
+        if (
+          words[len].text.indexOf(word.text) >= 0
+          || word.text.indexOf(words[len].text) >= 0
+        ) {
           return false
         }
       }
@@ -111,7 +114,7 @@ export default function (items, excludeList) {
     )
   )
 
-  wordsList = wordsList.map(word => word.text).slice(0, 50)
+  wordsList = wordsList.map(word => word.text + '|' + word.showTimes + '|' + rate(word)).slice(-50)
 
   console.log(cache.showTimes)
 
