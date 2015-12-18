@@ -18,7 +18,7 @@ import List from 'page/list'
 import History from 'page/history'
 import RouteCSSTransitionGroup from 'widget/route-css-transition-group'
 
-class App extends React.Component {
+/*class App extends React.Component {
   render() {
     const useAnimation = false
 
@@ -58,4 +58,14 @@ render((
       <Route path="history" components={{ header: Header, main: History }} />
     </Route>
   </Router>
-), document.getElementById('app-container'))
+), document.getElementById('app-container'))*/
+
+import extract from 'util/extract-keyword'
+import { Task as TaskModel } from 'model'
+
+TaskModel.list().then(list => {
+  console.log(extract(
+    list.map(item => item.cnt),
+    ['服务', '功能', '预览', '开发', '查看', '名单', '项目', '接入', '接入「', '学习', '增加', '拆分', '的bug', '页开发']
+  ))
+})
