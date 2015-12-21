@@ -6,8 +6,9 @@
 import './index.less'
 
 import React from 'react'
-import Footer from 'widget/footer'
 import Loading from 'widget/loading'
+import Graph from 'widget/graph'
+import Footer from 'widget/footer'
 import { Task as TaskModel } from 'model'
 import delegator from 'mixin/delegator'
 import extract from 'util/extract-keyword'
@@ -63,16 +64,55 @@ export default React.createClass ({
   render: function () {
     let keywords = extract(
       this.state.tasks.map(item => item.cnt),
-      10,
+      20,
       [
         '服务', '功能', '预览', '开发', '查看', '名单', '项目', '接入',
         '接入「', '学习', '增加', '拆分', '的bug', '页开发', '优化'
       ]
     )
 
+    function createRandomItemStyle() {
+      return {
+        normal: {
+          color: 'rgb(' + [
+            Math.round(Math.random() * 160),
+            Math.round(Math.random() * 160),
+            Math.round(Math.random() * 160)
+          ].join(',') + ')'
+        }
+      };
+    }
+
+    let graphOption = {
+        title: {
+            text: '关键词'
+        },
+        tooltip: {
+            show: false
+        },
+        series: [{
+            name: '关键词',
+            type: 'wordCloud',
+            size: ['80%', '80%'],
+            textRotation : [0, 90],
+            textPadding: 3,
+            autoSize: {
+                enable: true,
+                minSize: 14
+            },
+            data: keywords.map(
+              keyword => ({
+                name: keyword.text,
+                value: keyword.count * 100,
+                itemStyle: createRandomItemStyle()
+              })
+            )
+        }]
+    }
+
     let mainContent = this.state.loading
       ? <div className='loading-wrapper'><Loading /></div>
-      : <p>{keywords.join(', ')}</p>
+      : <Graph className='keywords-graph' option={graphOption} />
 
     return (
       <div className='main p-person-year'>

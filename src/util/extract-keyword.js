@@ -25,8 +25,8 @@ function combine (units) {
   return result
 }
 
-function getShowTimesInAll (word, sentenceList, cache) {
-  cache = cache.showTimes = cache.showTimes || {}
+function getCountInAll (word, sentenceList, cache) {
+  cache = cache.count = cache.count || {}
 
   if (cache.hasOwnProperty(word)) {
     return cache[word]
@@ -39,7 +39,7 @@ function getShowTimesInAll (word, sentenceList, cache) {
 }
 
 function rate (word) {
-  return word.text.length * word.showTimes
+  return word.text.length * word.count
 }
 
 function getWords (units, sentenceList, cache) {
@@ -50,15 +50,15 @@ function getWords (units, sentenceList, cache) {
     for (let start = index, end = index + 1; end < len; end++) {
       let wordUnits = units.slice(start, end)
       let wordText = combine(wordUnits)
-      let wordShowTimes = getShowTimesInAll(wordText, sentenceList, cache)
+      let wordCount = getCountInAll(wordText, sentenceList, cache)
 
       words.push({
         text: wordText,
         units: wordUnits,
-        showTimes: wordShowTimes
+        count: wordCount
       })
 
-      if (wordShowTimes <= 1) {
+      if (wordCount <= 1) {
         break
       }
     }
@@ -66,7 +66,7 @@ function getWords (units, sentenceList, cache) {
 
   words = words.filter(
     word => (
-      word.showTimes >= 2
+      word.count >= 2
       && word.text.length >= 2
     )
   )
@@ -112,9 +112,7 @@ export default function (items, num, excludeList) {
     )
   )
 
-  wordsList = wordsList.map(
-    word => word.text
-  ).slice(0, num)
+  wordsList = wordsList.slice(0, num)
 
   return wordsList
 }
