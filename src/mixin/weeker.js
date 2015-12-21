@@ -9,7 +9,9 @@ export default {
 
   getWeek: function (props) {
     props = props || this.props
-    return getWeek(props.params && props.params.week)
+    return (props.params && props.params.week)
+      ? parseInt(props.params.week, 10)
+      : getWeek()
   },
 
   getWeekRange: function (props) {

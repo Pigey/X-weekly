@@ -72,7 +72,7 @@ function getWords (units, sentenceList, cache) {
   )
 
   words = words.sort(
-    (prev, next) => rate(prev) - rate(next)
+    (prev, next) => rate(prev) > rate(next) ? 1 : -1
   )
 
   words = words.filter(
@@ -89,16 +89,14 @@ function getWords (units, sentenceList, cache) {
     }
   )
 
-  return words
+  return words.reverse()
 }
 
-export default function (items, excludeList) {
+export default function (items, num, excludeList) {
   items = items.slice(-200)
 
   items = items.map(split)
   excludeList = excludeList || []
-
-  console.log(items.map(combine))
 
   const cache = {}
 
@@ -114,9 +112,9 @@ export default function (items, excludeList) {
     )
   )
 
-  wordsList = wordsList.map(word => word.text + '|' + word.showTimes + '|' + rate(word)).slice(-50)
-
-  console.log(cache.showTimes)
+  wordsList = wordsList.map(
+    word => word.text
+  ).slice(0, num)
 
   return wordsList
 }

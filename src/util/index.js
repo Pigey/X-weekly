@@ -53,12 +53,7 @@ export function toLen (source, len) {
 }
 
 // get week
-export function getWeek (week) {
-  if (!isNaN(week = parseInt(week, 10))) {
-    return week
-  }
-
-  let d = Date.now()
+export function getWeek (d = Date.now()) {
   let day = (new Date(d)).getDay()
   d -= ((day === 0 ? 7 : day) - 1) * ONE_DAY
   return Math.ceil(d / (ONE_DAY * 7))
@@ -130,3 +125,19 @@ export function throttle (method, delay = 100) {
     }, delay)
   }
 }
+
+export function getRangeWeek (year) {
+  let d = new Date()
+  d.setFullYear(parseInt(year, 10))
+
+  d.setMonth(0)
+  d.setDate(1)
+  let begin = getWeek(d)
+
+  d.setMonth(11)
+  d.setDate(31)
+  let end = getWeek(d)
+
+  return { begin, end }
+}
+
