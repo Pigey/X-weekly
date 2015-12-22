@@ -7,11 +7,11 @@ import './index.less'
 
 import React from 'react'
 import Loading from 'widget/loading'
-import Graph from 'widget/graph'
+import GraphTaskKeywords from 'widget/graph/task/keywords'
+import GraphTaskProjects from 'widget/graph/task/projects'
 import Footer from 'widget/footer'
 import { Task as TaskModel } from 'model'
 import delegator from 'mixin/delegator'
-import extract from 'util/extract-keyword'
 import { getRangeWeek } from 'util'
 
 export default React.createClass ({
@@ -62,63 +62,13 @@ export default React.createClass ({
   },
 
   render: function () {
-    let keywords = extract(
-      this.state.tasks.map(item => item.cnt),
-      20,
-      [
-        '服务', '功能', '预览', '开发', '查看', '名单', '项目', '接入',
-        '接入「', '学习', '增加', '拆分', '的bug', '页开发', '优化'
-      ]
-    )
-
-    function createRandomItemStyle() {
-      return {
-        normal: {
-          color: 'rgba(' + [
-            Math.round(Math.random() * 160),
-            Math.round(Math.random() * 160),
-            Math.round(Math.random() * 160),
-            Math.random() / 2 + .3
-          ].join(',') + ')'
-        }
-      };
-    }
-
-    let graphOption = {
-        tooltip: {
-            show: false
-        },
-        series: [{
-            name: '关键词',
-            type: 'wordCloud',
-            size: ['80%', '80%'],
-            textRotation : [0, 90],
-            textPadding: 3,
-            itemStyle: {
-              normal: {
-                textStyle: {
-                  fontWeight: 'bold',
-                  fontFamily: 'Helvetica, arial, "Helvetica Neue", Helvetica, arial, "Source Han Sans", "Microsoft YaHei", sans-serif'
-                }
-              }
-            },
-            autoSize: {
-                enable: true,
-                minSize: 12
-            },
-            data: keywords.map(
-              keyword => ({
-                name: keyword.text,
-                value: keyword.count * 100,
-                itemStyle: createRandomItemStyle()
-              })
-            )
-        }]
-    }
 
     let mainContent = this.state.loading
       ? <div className='loading-wrapper'><Loading /></div>
-      : <Graph className='keywords-graph' option={graphOption} />
+      : <div>
+          <GraphTaskKeywords className='keywords-graph' tasks={this.state.tasks} />
+          <GraphTaskProjects className='projects-graph' tasks={this.state.tasks} />
+        </div>
 
     return (
       <div className='main p-person-year'>

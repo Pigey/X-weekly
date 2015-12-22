@@ -32,6 +32,7 @@ export default React.createClass ({
   getDefaultProps: function () {
     return {
       option: null,
+      theme: 'macarons',
       className: ''
     }
   },
@@ -41,7 +42,12 @@ export default React.createClass ({
 
     loadEcharts().then(echarts => {
       if (this.isMounted()) {
-        echarts.init(ReactDOM.findDOMNode(this)).setOption(this.props.option)
+        echarts.init(
+          ReactDOM.findDOMNode(this),
+          this.props.theme
+        ).setOption(
+          this.props.option
+        )
       }
     })
   },

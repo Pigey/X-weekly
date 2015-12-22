@@ -17,6 +17,11 @@ export const PROJECT_SEQUENCE = [
   '其他'
 ]
 
+export const PROJECT_ALIAS = {
+  '糯米pc端': '糯米-PC端',
+  '糯米wap端': '糯米-WAP端'
+}
+
 export const OCCUPIED_LEVEL_LIST = [
   {
     value: '1',
@@ -91,6 +96,9 @@ export function sortBy (list, sequence, field) {
 export function tasksToProjects (tasks) {
   let projectMap = tasks.reduce((projectMap, task) => {
     let name = task.project
+
+    name = PROJECT_ALIAS[name] || name
+
     let project = projectMap[name] = projectMap[name] || {
       name,
       tasks: []
