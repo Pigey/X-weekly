@@ -74,19 +74,17 @@ export default React.createClass ({
     function createRandomItemStyle() {
       return {
         normal: {
-          color: 'rgb(' + [
+          color: 'rgba(' + [
             Math.round(Math.random() * 160),
             Math.round(Math.random() * 160),
-            Math.round(Math.random() * 160)
+            Math.round(Math.random() * 160),
+            Math.random() / 2 + .3
           ].join(',') + ')'
         }
       };
     }
 
     let graphOption = {
-        title: {
-            text: '关键词'
-        },
         tooltip: {
             show: false
         },
@@ -96,9 +94,17 @@ export default React.createClass ({
             size: ['80%', '80%'],
             textRotation : [0, 90],
             textPadding: 3,
+            itemStyle: {
+              normal: {
+                textStyle: {
+                  fontWeight: 'bold',
+                  fontFamily: 'Helvetica, arial, "Helvetica Neue", Helvetica, arial, "Source Han Sans", "Microsoft YaHei", sans-serif'
+                }
+              }
+            },
             autoSize: {
                 enable: true,
-                minSize: 14
+                minSize: 12
             },
             data: keywords.map(
               keyword => ({
