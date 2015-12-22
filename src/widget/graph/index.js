@@ -37,9 +37,12 @@ export default React.createClass ({
   },
 
   componentDidMount: function () {
-    console.log(this.props.option)
+    console.info('[graph option]', this.props.option)
+
     loadEcharts().then(echarts => {
-      echarts.init(ReactDOM.findDOMNode(this)).setOption(this.props.option)
+      if (this.isMounted()) {
+        echarts.init(ReactDOM.findDOMNode(this)).setOption(this.props.option)
+      }
     })
   },
 
