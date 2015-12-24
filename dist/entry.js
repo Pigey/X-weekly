@@ -1,1 +1,1 @@
-window.insertScript('./dist/app.35420483443693e6f0c9.js');
+window.insertScript('./dist/app.1c7627e930f882ba7170.js');
