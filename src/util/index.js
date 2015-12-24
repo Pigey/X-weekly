@@ -74,11 +74,12 @@ export function getWeekRange (week) {
 }
 
 // format date
-export function formatDate (date) {
+export function formatDate (date, sep) {
+  sep = sep || '.'
   let y = toLen(date.getFullYear(), 4)
   let m = toLen(date.getMonth() + 1, 2)
   let d = toLen(date.getDate(), 2)
-  return `${y}.${m}.${d}`
+  return [y, m, d].join(sep)
 }
 
 export function sortBy (list, sequence, field) {
@@ -149,3 +150,10 @@ export function getRangeWeek (year) {
   return { begin, end }
 }
 
+export function getArray (begin, end) {
+  let array = [];
+  for (let i = 0; i <= end - begin; i++) {
+    array[i] = begin + i
+  }
+  return array
+}

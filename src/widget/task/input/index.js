@@ -35,7 +35,7 @@ export default React.createClass ({
   handlePersonChange: throttle(function (e) {
     this.handleChange(e)
     this.props.onPersonChange(e.target.value.trim())
-  }),
+  }, 500),
 
   handleSubmit: function (e) {
     e.preventDefault()

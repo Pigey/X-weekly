@@ -9,10 +9,11 @@ import React from 'react'
 import Loading from 'widget/loading'
 import GraphTaskKeywords from 'widget/graph/task/keywords'
 import GraphTaskProjects from 'widget/graph/task/projects'
+import GraphTaskTimeline from 'widget/graph/task/timeline'
 import Footer from 'widget/footer'
 import { Task as TaskModel } from 'model'
 import delegator from 'mixin/delegator'
-import { getRangeWeek } from 'util'
+import { getRangeWeek, getArray } from 'util'
 
 export default React.createClass ({
 
@@ -63,11 +64,18 @@ export default React.createClass ({
 
   render: function () {
 
+    let { begin, end } = getRangeWeek(parseInt(this.props.params.year, 10))
+    let weeks = getArray(begin, end)
+
     let mainContent = this.state.loading
       ? <div className='loading-wrapper'><Loading /></div>
       : <div>
+          <h4 className='graph-title'>年度关键词</h4>
           <GraphTaskKeywords className='keywords-graph' tasks={this.state.tasks} />
+          <h4 className='graph-title'>所有项目</h4>
           <GraphTaskProjects className='projects-graph' tasks={this.state.tasks} />
+          <h4 className='graph-title'>每周统计</h4>
+          <GraphTaskTimeline className='timeline-graph' tasks={this.state.tasks} weeks={weeks} />
         </div>
 
     return (

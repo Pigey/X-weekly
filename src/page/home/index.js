@@ -6,6 +6,7 @@
 import './index.less'
 
 import React from 'react'
+import { Link } from 'react-router'
 
 import ProjectList from 'widget/project/list'
 import TaskInput from 'widget/task/input'
@@ -193,8 +194,17 @@ export default React.createClass ({
     let savedOccupiedLevel = this.state.occupied && this.state.occupied.level
     let occupiedLevel = savedOccupiedLevel || this.estimateOccupiedLevel()
 
+    let yearLink = this.state.username
+      ? <div className='addon-block'>
+        <Link className='year-link' to={`/person/${this.state.username}/year/2015`}>
+          {`查看我的 2015`}
+        </Link>
+      </div>
+      : ''
+
     return (
       <div className='main p-home'>
+        {yearLink}
         <TaskInput person={this.state.username} projects={projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
         <OccupiedInput value={occupiedLevel} saved={savedOccupiedLevel} onSubmit={this.handleOccupiedLevelSet} />
         {projectsContent}

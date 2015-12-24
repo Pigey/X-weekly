@@ -40,35 +40,40 @@ export default React.createClass ({
     }
 
     let graphOption = {
-        tooltip: {
-            show: false
+      tooltip : {
+        show: true,
+        formatter: function (info) {
+          let word = info[1]
+          let count = info[2] / 100
+          return `${count} 次周报提到`
+        }
+      },
+      series: [{
+        name: '关键词',
+        type: 'wordCloud',
+        size: ['80%', '80%'],
+        textRotation : [0, 90],
+        textPadding: 3,
+        itemStyle: {
+          normal: {
+            textStyle: {
+              fontWeight: 'bold',
+              fontFamily: 'Helvetica, arial, "Helvetica Neue", Helvetica, arial, "Source Han Sans", "Microsoft YaHei", sans-serif'
+            }
+          }
         },
-        series: [{
-            name: '关键词',
-            type: 'wordCloud',
-            size: ['80%', '80%'],
-            textRotation : [0, 90],
-            textPadding: 3,
-            itemStyle: {
-              normal: {
-                textStyle: {
-                  fontWeight: 'bold',
-                  fontFamily: 'Helvetica, arial, "Helvetica Neue", Helvetica, arial, "Source Han Sans", "Microsoft YaHei", sans-serif'
-                }
-              }
-            },
-            autoSize: {
-                enable: true,
-                minSize: 12
-            },
-            data: keywords.map(
-              keyword => ({
-                name: keyword.text,
-                value: keyword.count * 100,
-                itemStyle: createRandomItemStyle()
-              })
-            )
-        }]
+        autoSize: {
+          enable: true,
+          minSize: 12
+        },
+        data: keywords.map(
+          keyword => ({
+            name: keyword.text,
+            value: keyword.count * 100,
+            itemStyle: createRandomItemStyle()
+          })
+        )
+      }]
     }
 
     return (
