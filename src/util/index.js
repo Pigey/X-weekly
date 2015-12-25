@@ -8,10 +8,13 @@ export const ONE_DAY = 24 * 60 * 60 * 1000
 
 // pre-set sequence for project
 export const PROJECT_SEQUENCE = [
+  '组件化开发平台',
+  '移动开放平台',
+  '模板编辑器 cybertron',
+  'TP 接入业务开发',
   '糯米-PC端',
   '糯米-WAP端',
   '糯米-组件化',
-  '组件化开发平台',
   'API开放(鸿鹄)平台',
   '小游戏',
   '其他'
