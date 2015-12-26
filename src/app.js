@@ -19,14 +19,14 @@ import History from 'page/history'
 import PersonYear from 'page/person/year'
 import RouteCSSTransitionGroup from 'widget/route-css-transition-group'
 
-import Favico from 'favico.js'
+/*import Favico from 'favico.js'
 
 new Favico().image(
   Object.assign(
     new Image(),
     { src: 'http://lab.ejci.net/favico.js/html5logo.png' }
   )
-);
+);*/
 
 class App extends React.Component {
   render() {
