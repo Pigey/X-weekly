@@ -20,7 +20,7 @@ export default React.createClass ({
     return {
       histories: [],
       loading: false
-    };
+    }
   },
 
   refreshHistories: function (noLoading) {
@@ -37,7 +37,7 @@ export default React.createClass ({
         histories: weeks.sort((a, b) => (b - a)).map(week => ({ week })),
         loading: false
       })
-    });
+    })
   },
 
   componentDidMount: function () {

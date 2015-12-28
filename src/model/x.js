@@ -13,5 +13,5 @@ export default new Promise((resolve, reject) => {
       token:config.token
     })
 
-  resolve(X);
+  resolve(X)
 })

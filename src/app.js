@@ -26,7 +26,7 @@ new Favico().image(
     new Image(),
     { src: 'http://lab.ejci.net/favico.js/html5logo.png' }
   )
-);
+)
 
 class App extends React.Component {
   render() {

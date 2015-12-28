@@ -38,7 +38,7 @@ export default React.createClass ({
   },
 
   handleSubmit: function (e) {
-    e.preventDefault();
+    e.preventDefault()
 
     this.setState({
       submiting: true

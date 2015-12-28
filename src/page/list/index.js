@@ -30,7 +30,7 @@ export default React.createClass ({
       occupiedList: [],
       lastPersons: [],
       loading: false
-    };
+    }
   },
 
   refreshOccupiedList: function (params) {

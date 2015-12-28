@@ -36,11 +36,11 @@ export default React.createClass ({
             Math.random() / 2 + .3
           ].join(',') + ')'
         }
-      };
+      }
     }
 
     let graphOption = {
-      tooltip : {
+      tooltip: {
         show: true,
         formatter: function (info) {
           let word = info[1]
@@ -52,7 +52,7 @@ export default React.createClass ({
         name: '关键词',
         type: 'wordCloud',
         size: ['80%', '80%'],
-        textRotation : [0, 90],
+        textRotation: [0, 90],
         textPadding: 3,
         itemStyle: {
           normal: {

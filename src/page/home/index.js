@@ -39,7 +39,7 @@ export default React.createClass ({
       tasks: [],
       occupied: null,
       loading: false
-    };
+    }
   },
 
   childContextTypes: {

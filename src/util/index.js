@@ -154,7 +154,7 @@ export function getRangeWeek (year) {
 }
 
 export function getArray (begin, end) {
-  let array = [];
+  let array = []
   for (let i = 0; i <= end - begin; i++) {
     array[i] = begin + i
   }
