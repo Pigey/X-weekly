@@ -204,7 +204,6 @@ export default React.createClass ({
 
     return (
       <div className='main p-home'>
-        {yearLink}
         <TaskInput person={this.state.username} projects={projects} statuses={this.state.statuses} onPersonChange={this.handleUsernameChange} onSubmit={this.handleTaskCreate}></TaskInput>
         <OccupiedInput value={occupiedLevel} saved={savedOccupiedLevel} onSubmit={this.handleOccupiedLevelSet} />
         {projectsContent}
