@@ -9,7 +9,7 @@ module.exports = {
   cache: true,
   entry: {
     app: [
-      'webpack/hot/dev-server',
+      'webpack/hot/only-dev-server',
       'webpack-dev-server/client?http://localhost:8088',
       './src/app'
     ]
