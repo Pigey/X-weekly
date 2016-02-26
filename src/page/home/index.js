@@ -157,7 +157,7 @@ export default React.createClass ({
 
   handleOccupiedLevelSet: function (level) {
     if (!this.state.username) {
-      return
+      return Promise.reject('Username required!')
     }
 
     if (this.state.occupied) {

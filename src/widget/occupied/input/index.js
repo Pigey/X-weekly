@@ -7,6 +7,7 @@ import './index.less'
 
 import React from 'react'
 import Loading from 'widget/loading'
+import ToolTip from 'widget/general/tooltip'
 import IconOk from './img/ok.svg'
 import { OCCUPIED_LEVEL_LIST } from 'util'
 
@@ -71,7 +72,9 @@ export default React.createClass ({
 
     let button = submiting
       ? <button className='submit' disabled><Loading className="loading" /></button>
-      : <button type='submit' className='submit' title='点击保存'><IconOk className="icon" /></button>
+      : <button type='submit' className='submit'>
+          <ToolTip className='attention' tip='点我点我！'><IconOk className="icon" /></ToolTip>
+        </button>
 
     let value = this.state.manuallyChanged ? this.state.value : this.props.value
     let dirty = value !== this.props.saved

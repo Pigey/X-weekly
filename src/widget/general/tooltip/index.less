@@ -1,0 +1,42 @@
+/*
+ * @file style for tooltip
+ * @author nighca <nighca@live.cn>
+ */
+
+@import "~util/index";
+
+.w-tooltip {
+    position: relative;
+    display: inherit;
+
+    .tip {
+        @tipColor: rgba(255, 255, 255, .9);
+        @tipBgColor: rgba(100, 100, 100, .6);
+
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) translateY(-1em);
+        bottom: 100%;
+        padding: .4em .6em;
+        line-height: 1.2em;
+
+        color: @tipColor;
+        background-color: @tipBgColor;
+        font-weight: normal;
+        font-size: 12px;
+        white-space: nowrap;
+        border-radius: .33em;
+
+        &:after {
+            @recSize: .5em;
+
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -@recSize;
+            border: @recSize solid transparent;
+            border-top-color: @tipBgColor;
+        }
+    }
+}
