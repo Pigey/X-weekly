@@ -25,7 +25,8 @@ export default React.createClass ({
           <ProjectItem 
             key={project.name} 
             name={project.name} 
-            tasks={project.tasks} />
+            tasks={project.tasks}
+          />
         )
       })
       : <p className="no-record">无记录</p>

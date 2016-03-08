@@ -96,7 +96,11 @@ export default React.createClass ({
         loading: loading ? ' loading' : '',
         options: loading
           ? <option>Loading ...</option>
-          : list.map(item => <option key={item._id} value={item.name}>{item.name}</option>)
+          : list.map(
+              item => (
+                <option key={item._id} value={item.name}>{item.name}</option>
+              )
+            )
       }
     })
 

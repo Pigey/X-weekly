@@ -21,7 +21,8 @@ export default React.createClass ({
         <TaskItem 
           key={task._id} 
           index={index} 
-          {...task} />
+          {...task}
+        />
       )
     })
 

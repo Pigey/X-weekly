@@ -29,7 +29,8 @@ class App extends React.Component {
           transitionName="slide" 
           transitionEnterTimeout={400} 
           transitionLeaveTimeout={400} 
-          order={[ '', 'home', 'list', 'history' ]}>
+          order={[ '', 'home', 'list', 'history' ]}
+        >
           {this.props.main}
         </RouteCSSTransitionGroup>
       : this.props.main
