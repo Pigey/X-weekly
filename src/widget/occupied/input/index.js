@@ -73,7 +73,7 @@ export default React.createClass ({
     let button = submiting
       ? <button className='submit' disabled><Loading className="loading" /></button>
       : <button type='submit' className='submit'>
-          <ToolTip className='attention' tip='点我点我！'><IconOk className="icon" /></ToolTip>
+          <IconOk className="icon attention" />
         </button>
 
     let value = this.state.manuallyChanged ? this.state.value : this.props.value
