@@ -10,6 +10,8 @@ export const ONE_DAY = 24 * 60 * 60 * 1000
 export const PROJECT_SEQUENCE = [
   '组件化开发平台',
   '移动开放平台',
+  '三端及模板编辑器',
+  '店铺装修',
   '模板编辑器 cybertron',
   'TP 接入业务开发',
   '糯米-PC端',
