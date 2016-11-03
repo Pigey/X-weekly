@@ -32,19 +32,18 @@ export default React.createClass ({
     this.validate()
   }),
 
- // handlePersonChange: throttle(function (e) {
- //   this.handleChange(e)
- //   this.props.onPersonChange(e.target.value.trim())
- // }, 500),
- 
+  // handlePersonChange: throttle(function (e) {
+  //   this.handleChange(e)
+  //   this.props.onPersonChange(e.target.value.trim())
+  // }, 500),
   handlePersonChangeProxy: throttle(function (targetValue){
-    this.handleChange()
-    this.props.onPersonChange(targetValue.trim());
+      this.handleChange()
+      this.props.onPersonChange(targetValue.trim());
   }, 500),
 
   handlePersonChange: function (e) {
     this.handlePersonChangeProxy(e.target.value);
-  }, 
+  },
 
   handleSubmit: function (e) {
     e.preventDefault()
